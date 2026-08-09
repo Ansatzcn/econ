@@ -238,11 +238,11 @@ function render(){
     tocControl.classList.toggle('hidden',!!rid);
     if(rid){
         const x=entries.find(e=>e.id===rid);
-        document.title=x?`${x.title} - econ`:'未找到 - econ';
+        document.title=x?`${x.title} - 经济文献`:'未找到 - 经济文献';
         entryList.innerHTML=x?`<a class="article-back" href="${attr(basePath())}">← 经济文献</a>${card(x)}`:`<div class="empty-state">未找到编号为 ${esc(rid)} 的文章。<br><br><a class="header-link" href="${attr(basePath())}">返回经济文献</a></div>`;
         renderToc([]);
     }else{
-        document.title='econ';
+        document.title='经济文献';
         entryList.innerHTML=entries.length?entries.map(card).join(''):'<div class="empty-state">暂无经济文献</div>';
         renderToc(entries);
     }
