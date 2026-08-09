@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>econ</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{min-height:100vh;padding:2rem 1rem 4rem;background:#f5f7fa;color:#1e293b;font-family:"Times New Roman","Microsoft YaHei","PingFang SC",serif}button,input,select{font:inherit}.container{width:min(100%,980px);margin:auto;padding:2rem 1.8rem;background:#fff;border-radius:30px;box-shadow:0 20px 40px -12px rgba(15,23,42,.14)}.page-header{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;padding-bottom:.75rem;margin-bottom:1rem;border-bottom:2px solid #e9edf4}.page-header h1{font-size:2.25rem;font-weight:600}.public-status{display:flex;align-items:center;gap:7px;margin-top:.45rem;color:#64748b;font-size:.8rem}.dot{width:8px;height:8px;border-radius:50%;background:#94a3b8}.dot.online{background:#22c55e}.dot.offline{background:#ef4444}.dot.syncing{background:#f59e0b}.header-actions{display:flex;gap:12px;flex-wrap:wrap;padding-top:.35rem}.header-link{border:0;background:transparent;color:#475569;font-size:.92rem;font-weight:600;cursor:pointer;text-decoration:none}.header-link:hover,.header-link:focus-visible{color:#0f172a;text-decoration:underline;outline:none}.hidden{display:none!important}.sync-meta{text-align:right;color:#94a3b8;font-size:.78rem;margin-bottom:1.3rem}.entry-list{display:flex;flex-direction:column;gap:1.25rem}.entry-card{padding:1.35rem 1.4rem 1.5rem;border:1px solid #e2e8f0;border-radius:20px;background:#fff}.entry-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:start;margin-bottom:1rem}.entry-title{font-size:1.28rem;line-height:1.35;overflow-wrap:anywhere}.entry-title a{color:#0f172a;text-decoration:none}.entry-title a:hover,.entry-title a:focus-visible{text-decoration:underline;outline:none}.entry-date{font-size:.88rem;color:#64748b;white-space:nowrap}.entry-body{font-size:1rem;line-height:1.8;color:#334155;overflow-wrap:anywhere}.entry-body p,.entry-body div,.entry-body blockquote,.entry-body ul,.entry-body ol{margin:.55rem 0}.entry-body ul,.entry-body ol{padding-left:1.6rem}.entry-body hr,.editor hr{border:0;border-top:1px solid #cbd5e1;margin:1.15rem 0}.entry-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:1rem}.entry-action{border:0;border-radius:999px;padding:.32rem .75rem;background:#f1f5f9;color:#64748b;font-size:.78rem;cursor:pointer;text-decoration:none}.entry-action:hover{background:#e2e8f0}.entry-action.delete{color:#991b1b;background:#fff1f2}.empty-state{padding:3rem 1rem;text-align:center;color:#94a3b8;border:1px dashed #cbd5e1;border-radius:20px;background:#fafcff}.article-back{display:inline-block;margin-bottom:1.1rem;color:#64748b;text-decoration:none;font-size:.88rem}.article-back:hover{text-decoration:underline;color:#334155}
+.modal-overlay{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;z-index:1000;display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));background:rgba(15,23,42,.48);backdrop-filter:blur(5px)}.modal-overlay.hidden{display:none}.modal-box,.config-box{width:min(94vw,760px);max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));display:flex;flex-direction:column;overflow:hidden;background:#fff;border-radius:24px;box-shadow:0 28px 60px rgba(15,23,42,.28)}.config-box{width:min(94vw,600px)}.modal-scroll,.config-scroll{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable;padding:1.6rem 1.6rem 1rem}.modal-scroll::-webkit-scrollbar,.config-scroll::-webkit-scrollbar{width:9px}.modal-scroll::-webkit-scrollbar-track,.config-scroll::-webkit-scrollbar-track{background:#f1f5f9}.modal-scroll::-webkit-scrollbar-thumb,.config-scroll::-webkit-scrollbar-thumb{background:#cbd5e1;border:2px solid #f1f5f9;border-radius:999px}.modal-title{font-size:1.35rem;margin-bottom:1.2rem}.config-desc{font-size:.88rem;line-height:1.55;color:#64748b;padding-bottom:.8rem;margin-bottom:1.15rem;border-bottom:1px solid #e2e8f0}.form-group{margin-bottom:1rem}.form-group label{display:block;margin-bottom:.35rem;color:#475569;font-size:.82rem;font-weight:700}.form-group input,.form-group select{width:100%;padding:.72rem .9rem;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#0f172a;outline:none}.form-group input:focus,.form-group select:focus{border-color:#94a3b8;box-shadow:0 0 0 3px rgba(148,163,184,.18)}.hint,.token-note{margin-top:.4rem;color:#94a3b8;font-size:.76rem;line-height:1.5}.token-note{color:#64748b}.hint a{color:#2563eb;text-decoration:none}.editor-shell{border:1px solid #cbd5e1;border-radius:14px;overflow:hidden}.editor-toolbar{display:flex;flex-wrap:wrap;gap:6px;padding:.55rem;border-bottom:1px solid #e2e8f0;background:#f8fafc}.editor-tool{min-width:34px;min-height:32px;padding:.35rem .55rem;border:1px solid #d7dee8;border-radius:8px;background:#fff;color:#334155;cursor:pointer;font-size:.86rem}.editor-tool.bold{font-weight:700}.editor-tool.italic{font-style:italic}.editor-tool.underline{text-decoration:underline}.editor{min-height:320px;max-height:52vh;overflow-y:auto;padding:1rem 1.05rem;font-size:1rem;line-height:1.8;outline:none}.editor:empty:before{content:"输入正文……";color:#94a3b8;pointer-events:none}.editor p,.editor div,.editor ul,.editor ol,.editor blockquote{margin:.55rem 0}.editor ul,.editor ol{padding-left:1.6rem}.modal-actions,.config-actions{flex:0 0 auto;display:flex;justify-content:flex-end;gap:10px;padding:.95rem 1.6rem max(.95rem,env(safe-area-inset-bottom));border-top:1px solid #e2e8f0;background:#fff;box-shadow:0 -8px 18px rgba(15,23,42,.04)}.modal-btn,.btn-config{padding:.62rem 1.45rem;border:0;border-radius:999px;font-weight:700;cursor:pointer}.secondary{background:#f1f5f9;color:#334155}.primary{background:#1e293b;color:#fff}.token-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px}.token-btn{border:1px solid #d1d9e6;border-radius:12px;background:#f8fafc;color:#334155;padding:.66rem .85rem;font-size:.82rem;font-weight:700;white-space:nowrap;cursor:pointer}.token-btn.danger{color:#991b1b;background:#fff7f7;border-color:#fecaca}.token-btn:disabled{opacity:.45;cursor:not-allowed}.back-to-top{position:fixed;right:14px;top:68%;transform:translateY(-50%);z-index:800;padding:.46rem .68rem;border:1px solid rgba(148,163,184,.5);border-radius:999px;background:rgba(255,255,255,.78);color:#64748b;box-shadow:0 4px 14px rgba(15,23,42,.07);font-size:.76rem;cursor:pointer;opacity:0;visibility:hidden;pointer-events:none;transition:.18s;backdrop-filter:blur(5px)}.back-to-top.visible{opacity:.58;visibility:visible;pointer-events:auto}.back-to-top:hover{opacity:1}.toc-control{position:fixed;left:14px;top:68%;transform:translateY(-50%);z-index:860}.toc-button{padding:.46rem .68rem;border:1px solid rgba(148,163,184,.5);border-radius:999px;background:rgba(255,255,255,.78);color:#64748b;box-shadow:0 4px 14px rgba(15,23,42,.07);font:inherit;font-size:.76rem;cursor:pointer;opacity:.58;transition:.18s;backdrop-filter:blur(5px)}.toc-button:hover,.toc-button:focus-visible,.toc-control.open .toc-button{opacity:1;background:rgba(255,255,255,.96);color:#334155;outline:none}.toc-panel{position:absolute;left:0;bottom:calc(100% + 10px);width:min(300px,78vw);max-height:min(62vh,500px);padding:.75rem;background:rgba(255,255,255,.97);border:1px solid #e2e8f0;border-radius:18px;box-shadow:10px 12px 32px rgba(15,23,42,.14);backdrop-filter:blur(8px);overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:.18s}.toc-control.open .toc-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}.toc-head{padding:.15rem .25rem .55rem;border-bottom:1px solid #e9edf4;color:#475569;font-size:.82rem;font-weight:700}.toc-list{list-style:none;max-height:calc(min(62vh,500px) - 48px);overflow-y:auto;padding:.45rem .1rem .1rem}.toc-list li+li{border-top:1px solid #f1f5f9}.toc-link{display:block;width:100%;padding:.55rem .5rem;color:#475569;text-decoration:none;font-size:.84rem;line-height:1.35;overflow-wrap:anywhere;border-radius:8px}.toc-link:hover,.toc-link:focus-visible{background:#f1f5f9;color:#0f172a;outline:none}.toc-empty{padding:.8rem .5rem;color:#94a3b8;font-size:.8rem;text-align:center}.toast{position:fixed;left:50%;bottom:26px;z-index:1200;transform:translateX(-50%);max-width:90vw;padding:.72rem 1.2rem;border-radius:999px;background:#1e293b;color:#fff;font-size:.88rem;box-shadow:0 8px 26px rgba(15,23,42,.22)}.toast.hidden{display:none}.toast.success{background:#16a34a}.toast.error{background:#dc2626}.toast.info{background:#2563eb}
+@media(max-width:700px){body{padding:1rem .7rem 3.5rem}.container{padding:1.2rem 1rem 1.4rem;border-radius:22px}.page-header h1{font-size:1.9rem}.entry-card{padding:1.05rem 1rem 1.2rem}.entry-title{font-size:1.12rem}.entry-date{font-size:.8rem}.modal-overlay{align-items:stretch;padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}.modal-box,.config-box{width:100%;max-height:calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom));border-radius:18px}.modal-scroll,.config-scroll{padding:1.1rem 1rem .8rem}.editor{min-height:240px;max-height:45vh}.modal-actions,.config-actions{padding:.8rem 1rem max(.8rem,env(safe-area-inset-bottom))}.modal-btn,.btn-config{flex:1 1 0}.token-row{grid-template-columns:minmax(0,1fr) auto}.token-btn.danger{grid-column:1/-1}.back-to-top{right:7px;top:70%;font-size:.7rem;padding:.42rem .56rem}.toc-control{left:7px;top:70%}.toc-button{font-size:.7rem;padding:.42rem .56rem}.toc-panel{width:min(280px,84vw)}}
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],processEscapes:true}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+</head>
+<body>
+<main class="container">
+<header class="page-header">
+<div>
+<h1>经济文献</h1>
+<div class="public-status"><span class="dot" id="statusDot"></span><span id="statusText">正在读取公开数据…</span></div>
+</div>
+<div class="header-actions">
+<a class="header-link hidden" id="homeLink" href="#">返回总页</a>
+<button class="header-link hidden" id="addLink" type="button">添加</button>
+<button class="header-link hidden" id="syncBtn" type="button">同步</button>
+<button class="header-link" id="configBtn" type="button">配置</button>
+</div>
+</header>
+<div class="sync-meta" id="lastSyncTime">公开阅读无需 Token</div>
+<section class="entry-list" id="entryList" aria-live="polite"></section>
+</main>
+
+<aside class="toc-control" id="tocControl" aria-label="文章目录">
+<button type="button" class="toc-button" id="tocButton" aria-expanded="false" aria-controls="tocPanel">目录</button>
+<nav class="toc-panel" id="tocPanel" aria-label="文章目录列表">
+<div class="toc-head">目录</div>
+<ul class="toc-list" id="tocList"></ul>
+</nav>
+</aside>
+<button class="back-to-top" id="backToTopBtn" type="button">↑ 回到顶部</button>
+
+<section class="modal-overlay hidden" id="entryModal" role="dialog" aria-modal="true" aria-labelledby="entryModalTitle">
+<div class="modal-box">
+<div class="modal-scroll">
+<h2 class="modal-title" id="entryModalTitle">添加文献</h2>
+<div class="form-group"><label for="titleInput">标题</label><input id="titleInput" type="text" autocomplete="off"></div>
+<div class="form-group"><label for="dateInput">日期</label><input id="dateInput" type="date"></div>
+<div class="form-group"><label>正文</label>
+<div class="editor-shell">
+<div class="editor-toolbar">
+<button class="editor-tool bold" data-command="bold" type="button">B</button>
+<button class="editor-tool italic" data-command="italic" type="button">I</button>
+<button class="editor-tool underline" data-command="underline" type="button">U</button>
+<button class="editor-tool" data-command="justifyLeft" type="button">左</button>
+<button class="editor-tool" data-command="justifyCenter" type="button">中</button>
+<button class="editor-tool" data-command="justifyRight" type="button">右</button>
+<button class="editor-tool" id="indentBtn" type="button">首行缩进</button>
+<button class="editor-tool" data-command="insertUnorderedList" type="button">• 列表</button>
+<button class="editor-tool" data-command="insertHorizontalRule" type="button">横线</button>
+<button class="editor-tool" data-command="removeFormat" type="button">清除格式</button>
+</div>
+<div class="editor" id="bodyEditor" contenteditable="true" spellcheck="true"></div>
+</div></div>
+</div>
+<div class="modal-actions"><button class="modal-btn secondary" id="entryCancelBtn" type="button">取消</button><button class="modal-btn primary" id="entrySaveBtn" type="button">保存</button></div>
+</div>
+</section>
+
+<section class="modal-overlay hidden" id="configModal" role="dialog" aria-modal="true" aria-labelledby="configHeading">
+<form class="config-box" id="configForm" autocomplete="on">
+<div class="config-scroll">
+<h2 class="modal-title" id="configHeading">管理配置</h2>
+<p class="config-desc">所有访问者都可直接读取同目录的 econ_data.json，无需 Token。以下配置只用于你新增、编辑、删除和同步文献。</p>
+<div class="form-group"><label for="cfgSavedToken">已保存 Token</label><div class="token-row"><select id="cfgSavedToken"><option value="">新增 Token</option></select><button class="token-btn" id="cfgNewTokenBtn" type="button">新增</button><button class="token-btn danger" id="cfgDeleteTokenBtn" type="button" disabled>删除</button></div></div>
+<div class="form-group"><label for="cfgTokenName">Token 名称</label><input id="cfgTokenName" type="text" autocomplete="off"></div>
+<div class="form-group"><label for="cfgOwner">仓库所有者</label><input id="cfgOwner" name="github-owner" type="text" autocomplete="username"></div>
+<div class="form-group"><label for="cfgRepo">仓库名称</label><input id="cfgRepo" type="text" autocomplete="off"></div>
+<div class="form-group"><label for="cfgFile">仓库中的数据文件路径</label><input id="cfgFile" type="text" value="econ_data.json" autocomplete="off"><div class="hint">若网页发布自仓库根目录，保持 econ_data.json；若从 docs 发布，可填写 docs/econ_data.json。</div></div>
+<div class="form-group"><label for="cfgToken">GitHub Personal Access Token</label><input id="cfgToken" name="github-token-new" type="password" autocomplete="new-password" spellcheck="false"><div class="token-note">Token 只保存在当前浏览器，用于写入 GitHub；公开访客不需要 Token。</div><div class="hint"><a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener noreferrer">创建细粒度 Token</a>，授予目标仓库 Contents: Read and write。</div></div>
+</div>
+<div class="config-actions"><button class="btn-config secondary" id="configCancelBtn" type="button">取消</button><button class="btn-config primary" id="configSaveBtn" type="submit">保存并连接</button></div>
+</form>
+</section>
+
+<div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(()=>{
+'use strict';
+
+const PUBLIC_FILE='econ_data.json';
+const NS='econ_public_v1';
+const DATA_KEY=`${NS}:entries`;
+const CONFIG_KEY=`${NS}:config`;
+const TOKEN_KEY=`${NS}:token_profiles`;
+const META_KEY=`${NS}:sync_meta`;
+const MAX_SYNC=750*1024;
+const AUTO_DELAY=700;
+const TAGS=new Set(['P','DIV','BR','B','STRONG','I','EM','U','UL','OL','LI','BLOCKQUOTE','SPAN','HR']);
+
+const $=id=>document.getElementById(id);
+const entryList=$('entryList'),addLink=$('addLink'),syncBtn=$('syncBtn'),configBtn=$('configBtn'),homeLink=$('homeLink'),
+statusDot=$('statusDot'),statusText=$('statusText'),lastSyncTime=$('lastSyncTime'),tocControl=$('tocControl'),tocButton=$('tocButton'),
+tocPanel=$('tocPanel'),tocList=$('tocList'),backToTopBtn=$('backToTopBtn'),entryModal=$('entryModal'),entryModalTitle=$('entryModalTitle'),
+titleInput=$('titleInput'),dateInput=$('dateInput'),bodyEditor=$('bodyEditor'),entryCancelBtn=$('entryCancelBtn'),entrySaveBtn=$('entrySaveBtn'),
+indentBtn=$('indentBtn'),configModal=$('configModal'),configForm=$('configForm'),cfgSavedToken=$('cfgSavedToken'),
+cfgNewTokenBtn=$('cfgNewTokenBtn'),cfgDeleteTokenBtn=$('cfgDeleteTokenBtn'),cfgTokenName=$('cfgTokenName'),cfgToken=$('cfgToken'),
+cfgOwner=$('cfgOwner'),cfgRepo=$('cfgRepo'),cfgFile=$('cfgFile'),configCancelBtn=$('configCancelBtn'),configSaveBtn=$('configSaveBtn'),toast=$('toast');
+
+let entries=[],editingId=null,previousFocus=null,profiles=[],selectedProfileId='',isSyncing=false,autoTimer=null,toastTimer=null;
+let config={token:'',tokenName:'',activeTokenId:'',owner:'',repo:'',file:'econ_data.json'};
+let meta={target:'',sha:null,fingerprint:null,lastSyncAt:null};
+
+function basePath(){
+    const clean=location.pathname.replace(/\/+$/,'');
+    const parts=clean.split('/').filter(Boolean);
+    const last=parts[parts.length-1]||'';
+    if(/^\d{6}$/.test(last)) return '/' + parts.slice(0,-1).join('/') + (parts.length>1?'/':'');
+    if(/\/index\.html$/i.test(location.pathname)) return location.pathname.replace(/index\.html$/i,'');
+    if(/\/404\.html$/i.test(location.pathname)) return location.pathname.replace(/404\.html$/i,'');
+    return location.pathname.endsWith('/')?location.pathname:location.pathname.replace(/[^/]*$/,'');
+}
+function routeId(){
+    const clean=location.pathname.replace(/\/+$/,'');
+    const last=clean.split('/').filter(Boolean).pop()||'';
+    return /^\d{6}$/.test(last)?last:'';
+}
+function rootUrl(){return location.origin+basePath()}
+function articlePath(id){return `${basePath()}${id}`}
+function articleUrl(id){return location.origin+articlePath(id)}
+function publicDataUrl(){return `${location.origin}${basePath()}${PUBLIC_FILE}?v=${Date.now()}`}
+
+function ls(k,v){try{localStorage.setItem(k,v);return true}catch(e){console.error(e);showToast('本地保存失败','error');return false}}
+function lg(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lr(k){try{localStorage.removeItem(k)}catch(e){}}
+function esc(v){const d=document.createElement('div');d.textContent=String(v??'');return d.innerHTML}
+function attr(v){return esc(v).replace(/"/g,'&quot;')}
+function clean(html){
+    const t=document.createElement('template');t.innerHTML=String(html||'');
+    const walk=node=>{
+        [...node.childNodes].forEach(c=>{
+            if(c.nodeType===1){
+                if(!TAGS.has(c.tagName)){c.replaceWith(...c.childNodes);return}
+                [...c.attributes].forEach(a=>{
+                    if(a.name!=='style')c.removeAttribute(a.name)
+                });
+                const allowed=[];
+                const style=c.style;
+                if(['left','center','right','justify'].includes(style.textAlign))allowed.push(`text-align:${style.textAlign}`);
+                if(style.textIndent==='2em'||style.textIndent==='0px'||style.textIndent==='0')allowed.push(`text-indent:${style.textIndent}`);
+                if(style.fontWeight==='bold'||Number(style.fontWeight)>=600)allowed.push('font-weight:bold');
+                if(style.fontStyle==='italic')allowed.push('font-style:italic');
+                if(style.textDecorationLine.includes('underline'))allowed.push('text-decoration:underline');
+                allowed.length?c.setAttribute('style',allowed.join(';')):c.removeAttribute('style');
+                walk(c)
+            }else if(c.nodeType!==3)c.remove()
+        })
+    };
+    walk(t.content);return t.innerHTML
+}
+function textOf(html){const d=document.createElement('div');d.innerHTML=html;return d.textContent.trim()}
+function normItem(x){
+    if(!x||typeof x!=='object')return null;
+    const id=String(x.id||'').trim(),title=String(x.title||'').trim(),date=String(x.date||'').trim(),body=clean(x.body||'');
+    if(!/^\d{6}$/.test(id)||!title||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!textOf(body))return null;
+    return{id,title,date,body,createdAt:Number(x.createdAt)||0,updatedAt:Number(x.updatedAt)||0}
+}
+function normList(v){return Array.isArray(v)?v.map(normItem).filter(Boolean):[]}
+function sortEntries(){entries.sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0)||a.title.localeCompare(b.title,'zh-CN'))}
+function fingerprint(v=entries){return JSON.stringify(normList(v).slice().sort((a,b)=>a.id.localeCompare(b.id)))}
+function saveLocal(){ls(DATA_KEY,JSON.stringify(entries))}
+function loadLocal(){const s=lg(DATA_KEY);if(!s)return[];try{return normList(JSON.parse(s))}catch(e){return[]}}
+function nextId(){
+    const used=new Set(entries.map(x=>x.id));
+    for(let i=0;i<200;i++){
+        const a=new Uint32Array(1);
+        crypto.getRandomValues(a);
+        const id=String(100000+(a[0]%900000));
+        if(!used.has(id))return id
+    }
+    for(let n=100000;n<=999999;n++){const id=String(n);if(!used.has(id))return id}
+    throw new Error('数字链接已用尽')
+}
+function setStatus(s,t){statusDot.className=`dot ${s}`;statusText.textContent=t}
+function showToast(m,t='info'){toast.textContent=m;toast.className=`toast ${t}`;toast.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.add('hidden'),3000)}
+function admin(){return !!(config.token&&config.owner&&config.repo&&config.file)}
+function updateAdminUI(){
+    addLink.classList.toggle('hidden',!admin());
+    syncBtn.classList.toggle('hidden',!admin());
+}
+function clearMath(){if(window.MathJax&&typeof MathJax.typesetClear==='function'){try{MathJax.typesetClear([entryList])}catch(e){}}}
+function typesetMath(){if(window.MathJax&&typeof MathJax.typesetPromise==='function')MathJax.typesetPromise([entryList]).catch(console.error)}
+function renderToc(list){
+    tocList.innerHTML=list.length?list.map(x=>`<li><a class="toc-link" href="${attr(articlePath(x.id))}" data-id="${attr(x.id)}">${esc(x.title)}</a></li>`).join(''):'<li class="toc-empty">暂无文章</li>'
+}
+function card(x){
+    const manage=admin()?`<button class="entry-action edit-entry" type="button" data-id="${attr(x.id)}">编辑</button><button class="entry-action delete delete-entry" type="button" data-id="${attr(x.id)}">删除</button>`:'';
+    return `<article class="entry-card" id="entry-${attr(x.id)}" data-id="${attr(x.id)}"><div class="entry-head"><h2 class="entry-title"><a class="article-link" href="${attr(articlePath(x.id))}" data-id="${attr(x.id)}">${esc(x.title)}</a></h2><time class="entry-date" datetime="${attr(x.date)}">${esc(x.date)}</time></div><div class="entry-body">${clean(x.body)}</div><div class="entry-actions"><button class="entry-action copy-link" type="button" data-id="${attr(x.id)}">复制链接</button>${manage}</div></article>`
+}
+function render(){
+    clearMath();sortEntries();saveLocal();updateAdminUI();
+    const rid=routeId();
+    homeLink.href=basePath();
+    homeLink.classList.toggle('hidden',!rid);
+    tocControl.classList.toggle('hidden',!!rid);
+    if(rid){
+        const x=entries.find(e=>e.id===rid);
+        document.title=x?`${x.title} - econ`:'未找到 - econ';
+        entryList.innerHTML=x?`<a class="article-back" href="${attr(basePath())}">← 经济文献</a>${card(x)}`:`<div class="empty-state">未找到编号为 ${esc(rid)} 的文章。<br><br><a class="header-link" href="${attr(basePath())}">返回经济文献</a></div>`;
+        renderToc([]);
+    }else{
+        document.title='econ';
+        entryList.innerHTML=entries.length?entries.map(card).join(''):'<div class="empty-state">暂无经济文献</div>';
+        renderToc(entries);
+    }
+    typesetMath()
+}
+async function loadPublic(){
+    setStatus('syncing','正在读取公开数据…');
+    try{
+        const r=await fetch(publicDataUrl(),{cache:'no-store'});
+        if(!r.ok)throw new Error(`HTTP ${r.status}`);
+        const data=await r.json();
+        entries=normList(data);
+        render();
+        setStatus('online','公开阅读');
+        lastSyncTime.textContent=`公开数据 · ${entries.length} 篇`;
+    }catch(e){
+        console.error(e);
+        const local=loadLocal();
+        if(admin()&&local.length){entries=local;render();setStatus('offline','公开数据暂不可用');lastSyncTime.textContent='显示当前浏览器中的管理数据'}
+        else{entries=[];render();setStatus('offline','公开数据读取失败');lastSyncTime.textContent='请确认 econ_data.json 已与网页放在同一发布目录'}
+    }
+}
+
+function today(){const n=new Date();return new Date(n.getTime()-n.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function openEntry(id=null){
+    if(!admin())return;
+    previousFocus=document.activeElement;editingId=id;
+    if(id){
+        const x=entries.find(e=>e.id===id);if(!x)return;
+        entryModalTitle.textContent='编辑文献';titleInput.value=x.title;dateInput.value=x.date;bodyEditor.innerHTML=clean(x.body)
+    }else{
+        entryModalTitle.textContent='添加文献';titleInput.value='';dateInput.value=today();bodyEditor.innerHTML=''
+    }
+    entryModal.classList.remove('hidden');setTimeout(()=>titleInput.focus(),50)
+}
+function closeEntry(){entryModal.classList.add('hidden');editingId=null;if(previousFocus instanceof HTMLElement)previousFocus.focus();previousFocus=null}
+function saveEntry(){
+    const title=titleInput.value.trim(),date=dateInput.value,body=clean(bodyEditor.innerHTML);
+    if(!title){showToast('请输入标题','error');titleInput.focus();return}
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){showToast('请选择日期','error');dateInput.focus();return}
+    if(!textOf(body)){showToast('请输入正文','error');bodyEditor.focus();return}
+    if(editingId){
+        const x=entries.find(e=>e.id===editingId);if(!x)return;
+        x.title=title;x.date=date;x.body=body;x.updatedAt=Date.now()
+    }else{
+        entries.push({id:nextId(),title,date,body,createdAt:Date.now(),updatedAt:Date.now()})
+    }
+    render();closeEntry();scheduleSync();showToast('已保存','success')
+}
+function delEntry(id){
+    const x=entries.find(e=>e.id===id);if(!x||!confirm(`确定删除“${x.title}”吗？`))return;
+    entries=entries.filter(e=>e.id!==id);render();scheduleSync();showToast('已删除','success')
+}
+function command(c){bodyEditor.focus();document.execCommand(c,false,null)}
+function indent(){
+    bodyEditor.focus();
+    let n=getSelection()?.anchorNode;
+    if(!n)return;
+    if(n.nodeType===3)n=n.parentElement;
+    const b=n.closest?.('p,div,li,blockquote')||bodyEditor;
+    b.style.textIndent=b.style.textIndent==='2em'?'0':'2em'
+}
+
+function tokenId(){return crypto?.randomUUID?crypto.randomUUID():`token_${Date.now()}_${Math.random().toString(36).slice(2,9)}`}
+function normProfile(x){
+    if(!x||typeof x!=='object')return null;
+    const token=String(x.token||'').trim();if(!token)return null;
+    return{id:String(x.id||tokenId()),name:String(x.name||'').trim(),token,owner:String(x.owner||'').trim(),repo:String(x.repo||'').trim(),file:String(x.file||'econ_data.json').trim()||'econ_data.json'}
+}
+function loadProfiles(){const s=lg(TOKEN_KEY);if(!s)return[];try{const p=JSON.parse(s);return Array.isArray(p)?p.map(normProfile).filter(Boolean):[]}catch(e){return[]}}
+function saveProfiles(){ls(TOKEN_KEY,JSON.stringify(profiles))}
+function renderProfiles(pref=selectedProfileId){
+    cfgSavedToken.innerHTML='<option value="">新增 Token</option>';
+    profiles.forEach((p,i)=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.name||`${p.owner}/${p.repo}`||`Token ${i+1}`;cfgSavedToken.appendChild(o)});
+    selectedProfileId=profiles.some(p=>p.id===pref)?pref:'';cfgSavedToken.value=selectedProfileId;cfgDeleteTokenBtn.disabled=!selectedProfileId
+}
+function useProfile(id){
+    selectedProfileId=id;const p=profiles.find(x=>x.id===id);if(!p)return;
+    cfgTokenName.value=p.name;cfgToken.value=p.token;cfgOwner.value=p.owner;cfgRepo.value=p.repo;cfgFile.value=p.file;cfgDeleteTokenBtn.disabled=false
+}
+function newProfile(){selectedProfileId='';cfgSavedToken.value='';cfgTokenName.value='';cfgToken.value='';cfgOwner.value='';cfgRepo.value='';cfgFile.value='econ_data.json';cfgDeleteTokenBtn.disabled=true}
+function upsertProfile(){
+    const token=cfgToken.value.trim(),name=cfgTokenName.value.trim(),owner=cfgOwner.value.trim(),repo=cfgRepo.value.trim(),file=cfgFile.value.trim()||'econ_data.json';
+    let p=profiles.find(x=>x.id===selectedProfileId)||profiles.find(x=>x.token===token);
+    if(p)Object.assign(p,{name,token,owner,repo,file});else{p={id:tokenId(),name,token,owner,repo,file};profiles.push(p)}
+    selectedProfileId=p.id;saveProfiles();renderProfiles(p.id);return p.id
+}
+function deleteProfile(){
+    const p=profiles.find(x=>x.id===selectedProfileId);if(!p)return;
+    if(!confirm(`确定从当前浏览器删除“${p.name||p.owner+'/'+p.repo}”吗？`))return;
+    profiles=profiles.filter(x=>x.id!==p.id);saveProfiles();
+    if(config.activeTokenId===p.id){config={token:'',tokenName:'',activeTokenId:'',owner:'',repo:'',file:'econ_data.json'};saveConfigBase()}
+    renderProfiles('');newProfile();updateAdminUI()
+}
+function saveConfigBase(){ls(CONFIG_KEY,JSON.stringify({activeTokenId:config.activeTokenId,owner:config.owner,repo:config.repo,file:config.file}))}
+function loadConfig(){
+    profiles=loadProfiles();let p={};const s=lg(CONFIG_KEY);if(s)try{p=JSON.parse(s)||{}}catch(e){}
+    const a=profiles.find(x=>x.id===p.activeTokenId)||profiles[0]||null;
+    config={token:a?.token||'',tokenName:a?.name||'',activeTokenId:a?.id||'',owner:a?.owner||p.owner||'',repo:a?.repo||p.repo||'',file:a?.file||p.file||'econ_data.json'};
+    selectedProfileId=config.activeTokenId;renderProfiles(selectedProfileId)
+}
+function openConfig(){
+    previousFocus=document.activeElement;renderProfiles(config.activeTokenId||selectedProfileId);
+    cfgTokenName.value=config.tokenName||'';cfgToken.value=config.token||'';cfgOwner.value=config.owner||'';cfgRepo.value=config.repo||'';cfgFile.value=config.file||'econ_data.json';
+    configModal.classList.remove('hidden');setTimeout(()=>cfgToken.focus(),50)
+}
+function closeConfig(){configModal.classList.add('hidden');if(previousFocus instanceof HTMLElement)previousFocus.focus();previousFocus=null}
+function target(){return admin()?`${config.owner}/${config.repo}/${config.file}`:''}
+function loadMeta(){const s=lg(META_KEY);if(!s)return;try{const x=JSON.parse(s);meta={target:x.target||'',sha:x.sha||null,fingerprint:x.fingerprint||null,lastSyncAt:x.lastSyncAt||null}}catch(e){}}
+function saveMeta(){ls(META_KEY,JSON.stringify(meta))}
+function updateMeta(snapshot,sha){meta={target:target(),sha:sha||null,fingerprint:fingerprint(snapshot),lastSyncAt:new Date().toISOString()};saveMeta();lastSyncTime.textContent=`管理同步 ${new Date(meta.lastSyncAt).toLocaleString()}`}
+function pathEncode(p){return String(p).split('/').filter(Boolean).map(encodeURIComponent).join('/')}
+async function api(method,endpoint,body=null){
+    const r=await fetch(`https://api.github.com/repos/${encodeURIComponent(config.owner)}/${encodeURIComponent(config.repo)}/${endpoint}`,{
+        method,
+        headers:{Authorization:`Bearer ${config.token}`,Accept:'application/vnd.github+json',...(body?{'Content-Type':'application/json'}:{})},
+        ...(body?{body:JSON.stringify(body)}:{})
+    });
+    const raw=await r.text();let data=null;if(raw)try{data=JSON.parse(raw)}catch(e){data={message:raw}};
+    if(!r.ok){const e=new Error(data?.message||`HTTP ${r.status}`);e.status=r.status;throw e}return data
+}
+function utf8b64(s){const bytes=new TextEncoder().encode(s);let bin='';for(let i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode(...bytes.subarray(i,i+0x8000));return btoa(bin)}
+function b64utf8(s){const bin=atob(String(s||'').replace(/\s/g,'')),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}
+async function readRemote(){
+    try{
+        const d=await api('GET',`contents/${pathEncode(config.file)}`);
+        if(!d||d.type!=='file'||d.encoding!=='base64')throw new Error('数据文件无法读取');
+        const data=normList(JSON.parse(b64utf8(d.content)));
+        return{exists:true,sha:d.sha,entries:data}
+    }catch(e){if(e.status===404)return{exists:false,sha:null,entries:[]};throw e}
+}
+async function writeRemote(snapshot,sha){
+    const normalized=normList(snapshot),raw=JSON.stringify(normalized,null,2);
+    if(new TextEncoder().encode(raw).length>MAX_SYNC)throw new Error('数据超过 750 KB 同步上限');
+    const body={message:`更新 econ 文献 - ${new Date().toLocaleString()}`,content:utf8b64(raw)};if(sha)body.sha=sha;
+    const r=await api('PUT',`contents/${pathEncode(config.file)}`,body);return r?.content?.sha||null
+}
+async function sync(show=true){
+    if(!admin()){showToast('请先配置管理 Token','error');return false}
+    if(isSyncing)return false;
+    isSyncing=true;syncBtn.disabled=true;setStatus('syncing','同步中…');
+    try{
+        const remote=await readRemote(),localFp=fingerprint(entries);
+        if(!remote.exists){
+            const sha=await writeRemote(entries,null);updateMeta(entries,sha)
+        }else{
+            const remoteFp=fingerprint(remote.entries);
+            const baseline=meta.target===target()?meta.fingerprint:null;
+            if(remoteFp===localFp){updateMeta(entries,remote.sha)}
+            else if(baseline&&localFp===baseline&&remoteFp!==baseline){
+                entries=remote.entries;render();updateMeta(entries,remote.sha)
+            }else if(!baseline&&loadLocal().length===0){
+                entries=remote.entries;render();updateMeta(entries,remote.sha)
+            }else{
+                const useLocal=confirm('本地与 GitHub 数据不同。\n\n确定：用当前网页数据覆盖 GitHub。\n取消：采用 GitHub 数据。');
+                if(useLocal){const sha=await writeRemote(entries,remote.sha);updateMeta(entries,sha)}
+                else{entries=remote.entries;render();updateMeta(entries,remote.sha)}
+            }
+        }
+        setStatus('online','公开阅读 · 管理已连接');
+        if(show)showToast('同步完成','success');
+        return true
+    }catch(e){
+        console.error(e);setStatus('offline','管理同步失败');showToast(`同步失败：${e.message}`,'error');return false
+    }finally{isSyncing=false;syncBtn.disabled=false}
+}
+function scheduleSync(){saveLocal();if(!admin())return;clearTimeout(autoTimer);autoTimer=setTimeout(()=>sync(false),AUTO_DELAY)}
+function saveConfig(e){
+    e.preventDefault();
+    const token=cfgToken.value.trim(),owner=cfgOwner.value.trim(),repo=cfgRepo.value.trim(),file=cfgFile.value.trim()||'econ_data.json';
+    if(!token){showToast('请输入 GitHub Token','error');return}
+    if(!owner||!repo){showToast('请输入仓库所有者和仓库名称','error');return}
+    config={token,tokenName:cfgTokenName.value.trim(),activeTokenId:'',owner,repo,file};
+    config.activeTokenId=upsertProfile();saveConfigBase();closeConfig();updateAdminUI();render();showToast('管理配置已保存','success');sync(true)
+}
+
+function navigateTo(id){
+    history.pushState({},'',articlePath(id));render();scrollTo({top:0,behavior:'instant'})
+}
+
+entryList.addEventListener('click',e=>{
+    const link=e.target.closest('.article-link');
+    if(link){e.preventDefault();navigateTo(link.dataset.id);return}
+    const copy=e.target.closest('.copy-link');
+    if(copy){navigator.clipboard?.writeText(articleUrl(copy.dataset.id)).then(()=>showToast('链接已复制','success')).catch(()=>showToast(articleUrl(copy.dataset.id),'info'));return}
+    const edit=e.target.closest('.edit-entry');if(edit){openEntry(edit.dataset.id);return}
+    const del=e.target.closest('.delete-entry');if(del)delEntry(del.dataset.id)
+});
+tocList.addEventListener('click',e=>{
+    const a=e.target.closest('.toc-link');if(!a)return;e.preventDefault();e.stopPropagation();navigateTo(a.dataset.id)
+});
+homeLink.addEventListener('click',e=>{e.preventDefault();history.pushState({},'',basePath());render();scrollTo({top:0,behavior:'instant'})});
+addLink.addEventListener('click',()=>openEntry());
+entryCancelBtn.addEventListener('click',closeEntry);entrySaveBtn.addEventListener('click',saveEntry);
+entryModal.addEventListener('click',e=>{if(e.target===entryModal)closeEntry()});
+document.querySelectorAll('.editor-tool[data-command]').forEach(b=>{b.addEventListener('mousedown',e=>e.preventDefault());b.addEventListener('click',()=>command(b.dataset.command))});
+indentBtn.addEventListener('mousedown',e=>e.preventDefault());indentBtn.addEventListener('click',indent);
+configBtn.addEventListener('click',openConfig);configCancelBtn.addEventListener('click',closeConfig);configForm.addEventListener('submit',saveConfig);
+cfgSavedToken.addEventListener('change',()=>cfgSavedToken.value?useProfile(cfgSavedToken.value):newProfile());
+cfgNewTokenBtn.addEventListener('click',newProfile);cfgDeleteTokenBtn.addEventListener('click',deleteProfile);
+syncBtn.addEventListener('click',()=>sync(true));
+tocButton.addEventListener('click',e=>{e.stopPropagation();tocControl.classList.add('open');tocButton.setAttribute('aria-expanded','true')});
+tocPanel.addEventListener('click',e=>e.stopPropagation());
+document.addEventListener('click',e=>{if(!tocControl.contains(e.target)){tocControl.classList.remove('open');tocButton.setAttribute('aria-expanded','false')}});
+backToTopBtn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+addEventListener('scroll',()=>backToTopBtn.classList.toggle('visible',scrollY>260),{passive:true});
+addEventListener('popstate',render);
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!entryModal.classList.contains('hidden'))closeEntry();else if(!configModal.classList.contains('hidden'))closeConfig();else{tocControl.classList.remove('open');tocButton.setAttribute('aria-expanded','false')}});
+
+loadConfig();loadMeta();updateAdminUI();
+if(admin()){
+    const local=loadLocal();
+    if(local.length)entries=local;
+}
+loadPublic().then(()=>{if(admin())sync(false)});
+window.addEventListener('load',typesetMath,{once:true});
+})();
+</script>
+</body>
+</html>
