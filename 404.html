@@ -161,13 +161,44 @@ function clean(html){
     walk(t.content);return t.innerHTML
 }
 function textOf(html){const d=document.createElement('div');d.innerHTML=html;return d.textContent.trim()}
-function normItem(x){
+function makeStableSixDigitId(seed,used){
+    let hash=0x811c9dc5;
+    const text=String(seed??'');
+    for(let i=0;i<text.length;i++){
+        hash^=text.charCodeAt(i);
+        hash=Math.imul(hash,0x01000193)
+    }
+    let number=100000+((hash>>>0)%900000);
+    for(let i=0;i<900000;i++){
+        const id=String(number);
+        if(!used.has(id))return id;
+        number=number===999999?100000:number+1
+    }
+    throw new Error('六位数字编号已用尽')
+}
+function normItem(x,idOverride=''){
     if(!x||typeof x!=='object')return null;
-    const id=String(x.id||'').trim(),title=String(x.title||'').trim(),date=String(x.date||'').trim(),body=clean(x.body||'');
+    const id=String(idOverride||x.id||'').trim(),title=String(x.title||'').trim(),date=String(x.date||'').trim(),body=clean(x.body||'');
     if(!/^\d{6}$/.test(id)||!title||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!textOf(body))return null;
     return{id,title,date,body,createdAt:Number(x.createdAt)||0,updatedAt:Number(x.updatedAt)||0}
 }
-function normList(v){return Array.isArray(v)?v.map(normItem).filter(Boolean):[]}
+function normList(v){
+    if(!Array.isArray(v))return[];
+    const used=new Set(),result=[];
+    v.forEach((x,index)=>{
+        if(!x||typeof x!=='object')return;
+        const title=String(x.title||'').trim(),date=String(x.date||'').trim(),body=clean(x.body||'');
+        if(!title||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!textOf(body))return;
+        let id=String(x.id||'').trim();
+        if(!/^\d{6}$/.test(id)||used.has(id)){
+            id=makeStableSixDigitId(`${title}\u0000${date}\u0000${body}\u0000${Number(x.createdAt)||0}\u0000${index}`,used)
+        }
+        used.add(id);
+        const item=normItem(x,id);
+        if(item)result.push(item)
+    });
+    return result
+}
 function sortEntries(){entries.sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0)||a.title.localeCompare(b.title,'zh-CN'))}
 function fingerprint(v=entries){return JSON.stringify(normList(v).slice().sort((a,b)=>a.id.localeCompare(b.id)))}
 function saveLocal(){ls(DATA_KEY,JSON.stringify(entries))}
