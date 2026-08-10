@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>经济文献</title>
+<meta property="og:title" content="经济文献">
+<meta property="og:site_name" content="经济文献">
+<meta property="og:type" content="website">
+<meta name="description" content="经济文献">
+<meta property="og:description" content="经济文献">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{min-height:100vh;padding:2rem 1rem 4rem;background:#f5f7fa;color:#1e293b;font-family:"Times New Roman","Microsoft YaHei","PingFang SC",serif}button,input,select{font:inherit}.container{width:min(100%,980px);margin:auto;padding:2rem 1.8rem;background:#fff;border-radius:30px;box-shadow:0 20px 40px -12px rgba(15,23,42,.14)}.page-header{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;padding-bottom:.75rem;margin-bottom:1rem;border-bottom:2px solid #e9edf4}.page-header h1{font-size:2.25rem;font-weight:600}.public-status{display:flex;align-items:center;gap:7px;margin-top:.45rem;color:#64748b;font-size:.8rem}.dot{width:8px;height:8px;border-radius:50%;background:#94a3b8}.dot.online{background:#22c55e}.dot.offline{background:#ef4444}.dot.syncing{background:#f59e0b}.header-actions{display:flex;gap:12px;flex-wrap:wrap;padding-top:.35rem}.header-link{border:0;background:transparent;color:#475569;font-size:.92rem;font-weight:600;cursor:pointer;text-decoration:none}.header-link:hover,.header-link:focus-visible{color:#0f172a;text-decoration:underline;outline:none}.hidden{display:none!important}.sync-meta{text-align:right;color:#94a3b8;font-size:.78rem;margin-bottom:1.3rem}.entry-list{display:flex;flex-direction:column;gap:1.25rem}.entry-card{padding:1.35rem 1.4rem 1.5rem;border:1px solid #e2e8f0;border-radius:20px;background:#fff}.entry-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:start;margin-bottom:1rem}.entry-title{font-size:1.28rem;line-height:1.35;overflow-wrap:anywhere}.entry-title a{color:#0f172a;text-decoration:none}.entry-title a:hover,.entry-title a:focus-visible{text-decoration:underline;outline:none}.entry-date{font-size:.88rem;color:#64748b;white-space:nowrap}.entry-body{font-size:1rem;line-height:1.8;color:#334155;overflow-wrap:anywhere}.entry-body p,.entry-body div,.entry-body blockquote,.entry-body ul,.entry-body ol{margin:.55rem 0}.entry-body ul,.entry-body ol{padding-left:1.6rem}.entry-body hr,.editor hr{border:0;border-top:1px solid #cbd5e1;margin:1.15rem 0}.entry-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:1rem}.entry-action{border:0;border-radius:999px;padding:.32rem .75rem;background:#f1f5f9;color:#64748b;font-size:.78rem;cursor:pointer;text-decoration:none}.entry-action:hover{background:#e2e8f0}.entry-action.delete{color:#991b1b;background:#fff1f2}.empty-state{padding:3rem 1rem;text-align:center;color:#94a3b8;border:1px dashed #cbd5e1;border-radius:20px;background:#fafcff}.article-back{display:inline-block;margin-bottom:1.1rem;color:#64748b;text-decoration:none;font-size:.88rem}.article-back:hover{text-decoration:underline;color:#334155}
 .modal-overlay{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;z-index:1000;display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));background:rgba(15,23,42,.48);backdrop-filter:blur(5px)}.modal-overlay.hidden{display:none}.modal-box,.config-box{width:min(94vw,760px);max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));display:flex;flex-direction:column;overflow:hidden;background:#fff;border-radius:24px;box-shadow:0 28px 60px rgba(15,23,42,.28)}.config-box{width:min(94vw,600px)}.modal-scroll,.config-scroll{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable;padding:1.6rem 1.6rem 1rem}.modal-scroll::-webkit-scrollbar,.config-scroll::-webkit-scrollbar{width:9px}.modal-scroll::-webkit-scrollbar-track,.config-scroll::-webkit-scrollbar-track{background:#f1f5f9}.modal-scroll::-webkit-scrollbar-thumb,.config-scroll::-webkit-scrollbar-thumb{background:#cbd5e1;border:2px solid #f1f5f9;border-radius:999px}.modal-title{font-size:1.35rem;margin-bottom:1.2rem}.config-desc{font-size:.88rem;line-height:1.55;color:#64748b;padding-bottom:.8rem;margin-bottom:1.15rem;border-bottom:1px solid #e2e8f0}.form-group{margin-bottom:1rem}.form-group label{display:block;margin-bottom:.35rem;color:#475569;font-size:.82rem;font-weight:700}.form-group input,.form-group select{width:100%;padding:.72rem .9rem;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#0f172a;outline:none}.form-group input:focus,.form-group select:focus{border-color:#94a3b8;box-shadow:0 0 0 3px rgba(148,163,184,.18)}.hint,.token-note{margin-top:.4rem;color:#94a3b8;font-size:.76rem;line-height:1.5}.token-note{color:#64748b}.hint a{color:#2563eb;text-decoration:none}.editor-shell{border:1px solid #cbd5e1;border-radius:14px;overflow:hidden}.editor-toolbar{display:flex;flex-wrap:wrap;gap:6px;padding:.55rem;border-bottom:1px solid #e2e8f0;background:#f8fafc}.editor-tool{min-width:34px;min-height:32px;padding:.35rem .55rem;border:1px solid #d7dee8;border-radius:8px;background:#fff;color:#334155;cursor:pointer;font-size:.86rem}.editor-tool.bold{font-weight:700}.editor-tool.italic{font-style:italic}.editor-tool.underline{text-decoration:underline}.editor{min-height:320px;max-height:52vh;overflow-y:auto;padding:1rem 1.05rem;font-size:1rem;line-height:1.8;outline:none}.editor:empty:before{content:"输入正文……";color:#94a3b8;pointer-events:none}.editor p,.editor div,.editor ul,.editor ol,.editor blockquote{margin:.55rem 0}.editor ul,.editor ol{padding-left:1.6rem}.modal-actions,.config-actions{flex:0 0 auto;display:flex;justify-content:flex-end;gap:10px;padding:.95rem 1.6rem max(.95rem,env(safe-area-inset-bottom));border-top:1px solid #e2e8f0;background:#fff;box-shadow:0 -8px 18px rgba(15,23,42,.04)}.modal-btn,.btn-config{padding:.62rem 1.45rem;border:0;border-radius:999px;font-weight:700;cursor:pointer}.secondary{background:#f1f5f9;color:#334155}.primary{background:#1e293b;color:#fff}.token-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px}.token-btn{border:1px solid #d1d9e6;border-radius:12px;background:#f8fafc;color:#334155;padding:.66rem .85rem;font-size:.82rem;font-weight:700;white-space:nowrap;cursor:pointer}.token-btn.danger{color:#991b1b;background:#fff7f7;border-color:#fecaca}.token-btn:disabled{opacity:.45;cursor:not-allowed}.back-to-top{position:fixed;right:14px;top:68%;transform:translateY(-50%);z-index:800;padding:.46rem .68rem;border:1px solid rgba(148,163,184,.5);border-radius:999px;background:rgba(255,255,255,.78);color:#64748b;box-shadow:0 4px 14px rgba(15,23,42,.07);font-size:.76rem;cursor:pointer;opacity:0;visibility:hidden;pointer-events:none;transition:.18s;backdrop-filter:blur(5px)}.back-to-top.visible{opacity:.58;visibility:visible;pointer-events:auto}.back-to-top:hover{opacity:1}.toc-control{position:fixed;left:14px;top:68%;transform:translateY(-50%);z-index:860}.toc-button{padding:.46rem .68rem;border:1px solid rgba(148,163,184,.5);border-radius:999px;background:rgba(255,255,255,.78);color:#64748b;box-shadow:0 4px 14px rgba(15,23,42,.07);font:inherit;font-size:.76rem;cursor:pointer;opacity:.58;transition:.18s;backdrop-filter:blur(5px)}.toc-button:hover,.toc-button:focus-visible,.toc-control.open .toc-button{opacity:1;background:rgba(255,255,255,.96);color:#334155;outline:none}.toc-panel{position:absolute;left:0;bottom:calc(100% + 10px);width:min(300px,78vw);max-height:min(62vh,500px);padding:.75rem;background:rgba(255,255,255,.97);border:1px solid #e2e8f0;border-radius:18px;box-shadow:10px 12px 32px rgba(15,23,42,.14);backdrop-filter:blur(8px);overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:.18s}.toc-control.open .toc-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}.toc-head{padding:.15rem .25rem .55rem;border-bottom:1px solid #e9edf4;color:#475569;font-size:.82rem;font-weight:700}.toc-list{list-style:none;max-height:calc(min(62vh,500px) - 48px);overflow-y:auto;padding:.45rem .1rem .1rem}.toc-list li+li{border-top:1px solid #f1f5f9}.toc-link{display:block;width:100%;padding:.55rem .5rem;color:#475569;text-decoration:none;font-size:.84rem;line-height:1.35;overflow-wrap:anywhere;border-radius:8px}.toc-link:hover,.toc-link:focus-visible{background:#f1f5f9;color:#0f172a;outline:none}.toc-empty{padding:.8rem .5rem;color:#94a3b8;font-size:.8rem;text-align:center}.toast{position:fixed;left:50%;bottom:26px;z-index:1200;transform:translateX(-50%);max-width:90vw;padding:.72rem 1.2rem;border-radius:999px;background:#1e293b;color:#fff;font-size:.88rem;box-shadow:0 8px 26px rgba(15,23,42,.22)}.toast.hidden{display:none}.toast.success{background:#16a34a}.toast.error{background:#dc2626}.toast.info{background:#2563eb}
@@ -72,7 +77,7 @@ window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],processEsc
 <form class="config-box" id="configForm" autocomplete="on">
 <div class="config-scroll">
 <h2 class="modal-title" id="configHeading">管理配置</h2>
-<p class="config-desc">所有访问者都可直接读取同目录的 econ_data.json，无需 Token。以下配置只用于你新增、编辑、删除和同步文献。</p>
+<p class="config-desc">所有访问者都可直接阅读，无需 Token。管理同步时会更新 econ_data.json，并为每篇文献自动创建“六位数字/index.html”静态页面。</p>
 <div class="form-group"><label for="cfgSavedToken">已保存 Token</label><div class="token-row"><select id="cfgSavedToken"><option value="">新增 Token</option></select><button class="token-btn" id="cfgNewTokenBtn" type="button">新增</button><button class="token-btn danger" id="cfgDeleteTokenBtn" type="button" disabled>删除</button></div></div>
 <div class="form-group"><label for="cfgTokenName">Token 名称</label><input id="cfgTokenName" type="text" autocomplete="off"></div>
 <div class="form-group"><label for="cfgOwner">仓库所有者</label><input id="cfgOwner" name="github-owner" type="text" autocomplete="username"></div>
@@ -128,7 +133,7 @@ function routeId(){
     return /^\d{6}$/.test(last)?last:'';
 }
 function rootUrl(){return location.origin+basePath()}
-function articlePath(id){return `${basePath()}${id}`}
+function articlePath(id){return `${basePath()}${id}/`}
 function articleUrl(id){return location.origin+articlePath(id)}
 function publicDataUrl(){return `${location.origin}${basePath()}${PUBLIC_FILE}?v=${Date.now()}`}
 
@@ -161,6 +166,55 @@ function clean(html){
     walk(t.content);return t.innerHTML
 }
 function textOf(html){const d=document.createElement('div');d.innerHTML=html;return d.textContent.trim()}
+function dataRepoDir(){
+    const parts=String(config.file||'econ_data.json').split('/').filter(Boolean);
+    parts.pop();
+    return parts.join('/')
+}
+function articleRepoPath(id){
+    return [dataRepoDir(),String(id),'index.html'].filter(Boolean).join('/')
+}
+function buildArticlePage(x){
+    const pageTitle=`${x.title} - 经济文献`;
+    const description=textOf(x.body).replace(/\s+/g,' ').trim().slice(0,160)||x.title;
+    const url=articleUrl(x.id);
+    const safeBody=clean(x.body);
+    return `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>${esc(pageTitle)}</title>
+<meta property="og:title" content="${attr(pageTitle)}">
+<meta property="og:site_name" content="经济文献">
+<meta property="og:type" content="article">
+<meta property="og:url" content="${attr(url)}">
+<meta name="description" content="${attr(description)}">
+<meta property="og:description" content="${attr(description)}">
+<link rel="canonical" href="${attr(url)}">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{min-height:100vh;padding:2rem 1rem 4rem;background:#f5f7fa;color:#1e293b;font-family:"Times New Roman","Microsoft YaHei","PingFang SC",serif}.container{width:min(100%,880px);margin:auto;padding:2rem 1.8rem;background:#fff;border-radius:30px;box-shadow:0 20px 40px -12px rgba(15,23,42,.14)}.back{display:inline-block;margin-bottom:1.3rem;color:#64748b;text-decoration:none;font-size:.9rem}.back:hover{text-decoration:underline;color:#334155}.head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:start;padding-bottom:1rem;margin-bottom:1.2rem;border-bottom:2px solid #e9edf4}.title{font-size:1.8rem;line-height:1.35;color:#0f172a;overflow-wrap:anywhere}.date{color:#64748b;font-size:.9rem;white-space:nowrap;padding-top:.35rem}.body{color:#334155;font-size:1rem;line-height:1.85;overflow-wrap:anywhere}.body p,.body div,.body blockquote,.body ul,.body ol{margin:.58rem 0}.body ul,.body ol{padding-left:1.6rem}.body hr{border:0;border-top:1px solid #cbd5e1;margin:1.2rem 0}.back-to-top{position:fixed;right:14px;top:68%;transform:translateY(-50%);padding:.46rem .68rem;border:1px solid rgba(148,163,184,.5);border-radius:999px;background:rgba(255,255,255,.82);color:#64748b;font-family:inherit;font-size:.76rem;cursor:pointer;opacity:.6;box-shadow:0 4px 14px rgba(15,23,42,.07)}@media(max-width:700px){body{padding:1rem .7rem 3.5rem}.container{padding:1.25rem 1rem 1.5rem;border-radius:22px}.head{grid-template-columns:1fr}.title{font-size:1.45rem}.date{padding-top:0}.back-to-top{right:7px;font-size:.7rem}}
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],processEscapes:true}};
+<\/script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"><\/script>
+</head>
+<body>
+<main class="container">
+<a class="back" href="../">← 经济文献</a>
+<article>
+<header class="head">
+<h1 class="title">${esc(x.title)}</h1>
+<time class="date" datetime="${attr(x.date)}">${esc(x.date)}</time>
+</header>
+<div class="body">${safeBody}</div>
+</article>
+</main>
+<button class="back-to-top" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 回到顶部</button>
+</body>
+</html>`
+}
 function makeStableSixDigitId(seed,used){
     let hash=0x811c9dc5;
     const text=String(seed??'');
@@ -366,48 +420,118 @@ async function api(method,endpoint,body=null){
 }
 function utf8b64(s){const bytes=new TextEncoder().encode(s);let bin='';for(let i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode(...bytes.subarray(i,i+0x8000));return btoa(bin)}
 function b64utf8(s){const bin=atob(String(s||'').replace(/\s/g,'')),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}
-async function readRemote(){
+async function readRepoText(path){
     try{
-        const d=await api('GET',`contents/${pathEncode(config.file)}`);
-        if(!d||d.type!=='file'||d.encoding!=='base64')throw new Error('数据文件无法读取');
-        const data=normList(JSON.parse(b64utf8(d.content)));
-        return{exists:true,sha:d.sha,entries:data}
-    }catch(e){if(e.status===404)return{exists:false,sha:null,entries:[]};throw e}
+        const d=await api('GET',`contents/${pathEncode(path)}`);
+        if(!d||d.type!=='file'||d.encoding!=='base64')throw new Error(`文件无法读取：${path}`);
+        return{exists:true,sha:d.sha,text:b64utf8(d.content)}
+    }catch(e){
+        if(e.status===404)return{exists:false,sha:null,text:''};
+        throw e
+    }
+}
+async function writeRepoText(path,content,sha,message){
+    const body={message,content:utf8b64(content)};
+    if(sha)body.sha=sha;
+    const r=await api('PUT',`contents/${pathEncode(path)}`,body);
+    return r?.content?.sha||null
+}
+async function deleteRepoText(path,sha,message){
+    if(!sha)return;
+    await api('DELETE',`contents/${pathEncode(path)}`,{message,sha})
+}
+async function readRemote(){
+    const file=await readRepoText(config.file);
+    if(!file.exists)return{exists:false,sha:null,entries:[]};
+    let parsed;
+    try{parsed=JSON.parse(file.text)}catch(e){throw new Error(`数据文件 JSON 无法解析：${e.message}`)}
+    return{exists:true,sha:file.sha,entries:normList(parsed)}
 }
 async function writeRemote(snapshot,sha){
     const normalized=normList(snapshot),raw=JSON.stringify(normalized,null,2);
     if(new TextEncoder().encode(raw).length>MAX_SYNC)throw new Error('数据超过 750 KB 同步上限');
-    const body={message:`更新 econ 文献 - ${new Date().toLocaleString()}`,content:utf8b64(raw)};if(sha)body.sha=sha;
-    const r=await api('PUT',`contents/${pathEncode(config.file)}`,body);return r?.content?.sha||null
+    return writeRepoText(config.file,raw,sha,`更新经济文献数据 - ${new Date().toLocaleString()}`)
+}
+async function syncStaticPages(snapshot,previousRemoteEntries=[]){
+    const normalized=normList(snapshot);
+    const wanted=new Set(normalized.map(x=>x.id));
+
+    for(const x of normalized){
+        const path=articleRepoPath(x.id);
+        const html=buildArticlePage(x);
+        const remote=await readRepoText(path);
+        if(!remote.exists||remote.text!==html){
+            await writeRepoText(
+                path,
+                html,
+                remote.sha,
+                `${remote.exists?'更新':'创建'}文献页面 ${x.id} - ${x.title}`
+            )
+        }
+    }
+
+    const previous=normList(previousRemoteEntries);
+    for(const x of previous){
+        if(wanted.has(x.id))continue;
+        const path=articleRepoPath(x.id);
+        const remote=await readRepoText(path);
+        if(remote.exists){
+            await deleteRepoText(path,remote.sha,`删除文献页面 ${x.id} - ${x.title}`)
+        }
+    }
 }
 async function sync(show=true){
     if(!admin()){showToast('请先配置管理 Token','error');return false}
     if(isSyncing)return false;
     isSyncing=true;syncBtn.disabled=true;setStatus('syncing','同步中…');
     try{
-        const remote=await readRemote(),localFp=fingerprint(entries);
+        const remote=await readRemote();
+        const previousRemoteEntries=remote.exists?[...remote.entries]:[];
+        const localFp=fingerprint(entries);
+
         if(!remote.exists){
-            const sha=await writeRemote(entries,null);updateMeta(entries,sha)
+            const sha=await writeRemote(entries,null);
+            updateMeta(entries,sha)
         }else{
             const remoteFp=fingerprint(remote.entries);
             const baseline=meta.target===target()?meta.fingerprint:null;
-            if(remoteFp===localFp){updateMeta(entries,remote.sha)}
-            else if(baseline&&localFp===baseline&&remoteFp!==baseline){
-                entries=remote.entries;render();updateMeta(entries,remote.sha)
+
+            if(remoteFp===localFp){
+                updateMeta(entries,remote.sha)
+            }else if(baseline&&localFp===baseline&&remoteFp!==baseline){
+                entries=remote.entries;
+                render();
+                updateMeta(entries,remote.sha)
             }else if(!baseline&&loadLocal().length===0){
-                entries=remote.entries;render();updateMeta(entries,remote.sha)
+                entries=remote.entries;
+                render();
+                updateMeta(entries,remote.sha)
             }else{
                 const useLocal=confirm('本地与 GitHub 数据不同。\n\n确定：用当前网页数据覆盖 GitHub。\n取消：采用 GitHub 数据。');
-                if(useLocal){const sha=await writeRemote(entries,remote.sha);updateMeta(entries,sha)}
-                else{entries=remote.entries;render();updateMeta(entries,remote.sha)}
+                if(useLocal){
+                    const sha=await writeRemote(entries,remote.sha);
+                    updateMeta(entries,sha)
+                }else{
+                    entries=remote.entries;
+                    render();
+                    updateMeta(entries,remote.sha)
+                }
             }
         }
+
+        await syncStaticPages(entries,previousRemoteEntries);
         setStatus('online','公开阅读 · 管理已连接');
-        if(show)showToast('同步完成','success');
+        if(show)showToast('同步完成；静态文章页已更新','success');
         return true
     }catch(e){
-        console.error(e);setStatus('offline','管理同步失败');showToast(`同步失败：${e.message}`,'error');return false
-    }finally{isSyncing=false;syncBtn.disabled=false}
+        console.error(e);
+        setStatus('offline','管理同步失败');
+        showToast(`同步失败：${e.message}`,'error');
+        return false
+    }finally{
+        isSyncing=false;
+        syncBtn.disabled=false
+    }
 }
 function scheduleSync(){saveLocal();if(!admin())return;clearTimeout(autoTimer);autoTimer=setTimeout(()=>sync(false),AUTO_DELAY)}
 function saveConfig(e){
@@ -425,14 +549,11 @@ function navigateTo(id){
 
 entryList.addEventListener('click',e=>{
     const link=e.target.closest('.article-link');
-    if(link){e.preventDefault();navigateTo(link.dataset.id);return}
+    if(link)return;
     const copy=e.target.closest('.copy-link');
     if(copy){navigator.clipboard?.writeText(articleUrl(copy.dataset.id)).then(()=>showToast('链接已复制','success')).catch(()=>showToast(articleUrl(copy.dataset.id),'info'));return}
     const edit=e.target.closest('.edit-entry');if(edit){openEntry(edit.dataset.id);return}
     const del=e.target.closest('.delete-entry');if(del)delEntry(del.dataset.id)
-});
-tocList.addEventListener('click',e=>{
-    const a=e.target.closest('.toc-link');if(!a)return;e.preventDefault();e.stopPropagation();navigateTo(a.dataset.id)
 });
 homeLink.addEventListener('click',e=>{e.preventDefault();history.pushState({},'',basePath());render();scrollTo({top:0,behavior:'instant'})});
 addLink.addEventListener('click',()=>openEntry());
