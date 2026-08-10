@@ -361,9 +361,16 @@ function indent(){
 }
 
 function tokenId(){return crypto?.randomUUID?crypto.randomUUID():`token_${Date.now()}_${Math.random().toString(36).slice(2,9)}`}
+function normalizeToken(value){
+    return String(value??'')
+        .replace(/^\s*(?:Bearer|token)\s+/i,'')
+        .replace(/[\u200B-\u200D\u2060\uFEFF]/g,'')
+        .replace(/[\s"'`]+/g,'')
+        .trim()
+}
 function normProfile(x){
     if(!x||typeof x!=='object')return null;
-    const token=String(x.token||'').trim();if(!token)return null;
+    const token=normalizeToken(x.token);if(!token)return null;
     return{id:String(x.id||tokenId()),name:String(x.name||'').trim(),token,owner:String(x.owner||'').trim(),repo:String(x.repo||'').trim(),file:String(x.file||'econ_data.json').trim()||'econ_data.json'}
 }
 function loadProfiles(){const s=lg(TOKEN_KEY);if(!s)return[];try{const p=JSON.parse(s);return Array.isArray(p)?p.map(normProfile).filter(Boolean):[]}catch(e){return[]}}
@@ -379,7 +386,7 @@ function useProfile(id){
 }
 function newProfile(){selectedProfileId='';cfgSavedToken.value='';cfgTokenName.value='';cfgToken.value='';cfgOwner.value='';cfgRepo.value='';cfgFile.value='econ_data.json';cfgDeleteTokenBtn.disabled=true}
 function upsertProfile(){
-    const token=cfgToken.value.trim(),name=cfgTokenName.value.trim(),owner=cfgOwner.value.trim(),repo=cfgRepo.value.trim(),file=cfgFile.value.trim()||'econ_data.json';
+    const token=normalizeToken(cfgToken.value),name=cfgTokenName.value.trim(),owner=cfgOwner.value.trim(),repo=cfgRepo.value.trim(),file=cfgFile.value.trim()||'econ_data.json';
     let p=profiles.find(x=>x.id===selectedProfileId)||profiles.find(x=>x.token===token);
     if(p)Object.assign(p,{name,token,owner,repo,file});else{p={id:tokenId(),name,token,owner,repo,file};profiles.push(p)}
     selectedProfileId=p.id;saveProfiles();renderProfiles(p.id);return p.id
@@ -394,13 +401,27 @@ function deleteProfile(){
 function saveConfigBase(){ls(CONFIG_KEY,JSON.stringify({activeTokenId:config.activeTokenId,owner:config.owner,repo:config.repo,file:config.file}))}
 function loadConfig(){
     profiles=loadProfiles();let p={};const s=lg(CONFIG_KEY);if(s)try{p=JSON.parse(s)||{}}catch(e){}
-    const a=profiles.find(x=>x.id===p.activeTokenId)||profiles[0]||null;
-    config={token:a?.token||'',tokenName:a?.name||'',activeTokenId:a?.id||'',owner:a?.owner||p.owner||'',repo:a?.repo||p.repo||'',file:a?.file||p.file||'econ_data.json'};
+    // 只能恢复明确记录为 activeTokenId 的 Token。
+    // 绝不再退回 profiles[0]，否则旧 Token / 失效 Token 会被网页自动拿去同步。
+    const a=profiles.find(x=>x.id===p.activeTokenId)||null;
+    config={
+        token:a?normalizeToken(a.token):'',
+        tokenName:a?.name||'',
+        activeTokenId:a?.id||'',
+        owner:a?.owner||p.owner||'',
+        repo:a?.repo||p.repo||'',
+        file:a?.file||p.file||'econ_data.json'
+    };
     selectedProfileId=config.activeTokenId;renderProfiles(selectedProfileId)
 }
 function openConfig(){
     previousFocus=document.activeElement;renderProfiles(config.activeTokenId||selectedProfileId);
-    cfgTokenName.value=config.tokenName||'';cfgToken.value=config.token||'';cfgOwner.value=config.owner||'';cfgRepo.value=config.repo||'';cfgFile.value=config.file||'econ_data.json';
+    const activeProfile=profiles.find(x=>x.id===config.activeTokenId)||null;
+    cfgTokenName.value=config.tokenName||activeProfile?.name||'';
+    cfgToken.value=config.token||activeProfile?.token||'';
+    cfgOwner.value=config.owner||activeProfile?.owner||'';
+    cfgRepo.value=config.repo||activeProfile?.repo||'';
+    cfgFile.value=config.file||activeProfile?.file||'econ_data.json';
     configModal.classList.remove('hidden');setTimeout(()=>cfgToken.focus(),50)
 }
 function closeConfig(){configModal.classList.add('hidden');if(previousFocus instanceof HTMLElement)previousFocus.focus();previousFocus=null}
@@ -409,14 +430,63 @@ function loadMeta(){const s=lg(META_KEY);if(!s)return;try{const x=JSON.parse(s);
 function saveMeta(){ls(META_KEY,JSON.stringify(meta))}
 function updateMeta(snapshot,sha){meta={target:target(),sha:sha||null,fingerprint:fingerprint(snapshot),lastSyncAt:new Date().toISOString()};saveMeta();lastSyncTime.textContent=`管理同步 ${new Date(meta.lastSyncAt).toLocaleString()}`}
 function pathEncode(p){return String(p).split('/').filter(Boolean).map(encodeURIComponent).join('/')}
+function apiErrorMessage(e){
+    if(!e)return'未知错误';
+    if(e.status===401)return'GitHub 拒绝了当前 Token（401）。该 Token 无效、已过期/撤销，或复制内容被污染；请重新打开“配置”并保存有效 Token。';
+    if(e.status===403){
+        const permissions=e.acceptedPermissions?`；接口要求权限：${e.acceptedPermissions}`:'';
+        return`GitHub 拒绝访问（403）。请检查 Token 的仓库授权及 Contents 权限${permissions}`;
+    }
+    if(e.status===404)return'目标仓库或文件不可访问（404）。请检查仓库所有者、仓库名称，以及细粒度 Token 是否授权了该仓库。';
+    return e.message||String(e)
+}
+async function githubRequest(url,method='GET',body=null,tokenValue=config.token){
+    const token=normalizeToken(tokenValue);
+    if(!token){
+        const e=new Error('GitHub Token 为空');
+        e.status=401;
+        throw e
+    }
+    const headers={
+        Authorization:`Bearer ${token}`,
+        Accept:'application/vnd.github+json',
+        'X-GitHub-Api-Version':'2026-03-10'
+    };
+    const options={method,headers,cache:'no-store'};
+    if(body!==null){
+        headers['Content-Type']='application/json';
+        options.body=JSON.stringify(body)
+    }
+    const r=await fetch(url,options);
+    const raw=await r.text();
+    let data=null;
+    if(raw)try{data=JSON.parse(raw)}catch(e){data={message:raw}};
+    if(!r.ok){
+        const e=new Error(data?.message||`HTTP ${r.status}`);
+        e.status=r.status;
+        e.payload=data;
+        e.acceptedPermissions=r.headers.get('X-Accepted-GitHub-Permissions')||'';
+        e.requestId=r.headers.get('X-GitHub-Request-Id')||'';
+        throw e
+    }
+    return data
+}
 async function api(method,endpoint,body=null){
-    const r=await fetch(`https://api.github.com/repos/${encodeURIComponent(config.owner)}/${encodeURIComponent(config.repo)}/${endpoint}`,{
-        method,
-        headers:{Authorization:`Bearer ${config.token}`,Accept:'application/vnd.github+json',...(body?{'Content-Type':'application/json'}:{})},
-        ...(body?{body:JSON.stringify(body)}:{})
-    });
-    const raw=await r.text();let data=null;if(raw)try{data=JSON.parse(raw)}catch(e){data={message:raw}};
-    if(!r.ok){const e=new Error(data?.message||`HTTP ${r.status}`);e.status=r.status;throw e}return data
+    const url=`https://api.github.com/repos/${encodeURIComponent(config.owner)}/${encodeURIComponent(config.repo)}/${endpoint}`;
+    return githubRequest(url,method,body,config.token)
+}
+async function verifyTokenAndRepository(token,owner,repo){
+    const normalized=normalizeToken(token);
+    // 第一步只验证凭据本身。GET /user 支持 fine-grained PAT，且无需额外权限。
+    const user=await githubRequest('https://api.github.com/user','GET',null,normalized);
+    // 第二步再验证该 Token 对目标仓库确实可访问。
+    const repository=await githubRequest(
+        `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`,
+        'GET',
+        null,
+        normalized
+    );
+    return{token:normalized,user,repository}
 }
 function utf8b64(s){const bytes=new TextEncoder().encode(s);let bin='';for(let i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode(...bytes.subarray(i,i+0x8000));return btoa(bin)}
 function b64utf8(s){const bin=atob(String(s||'').replace(/\s/g,'')),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}
@@ -525,8 +595,14 @@ async function sync(show=true){
         return true
     }catch(e){
         console.error(e);
-        setStatus('offline','管理同步失败');
-        showToast(`同步失败：${e.message}`,'error');
+        setStatus('offline',e.status===401?'Token 验证失败':'管理同步失败');
+        showToast(`同步失败：${apiErrorMessage(e)}`,'error');
+        // 401 时清掉运行时 Token，避免页面继续拿失效凭据反复自动请求。
+        // 已保存的 Token 配置仍保留，用户可在配置窗口中修改或删除。
+        if(e.status===401){
+            config.token='';
+            updateAdminUI()
+        }
         return false
     }finally{
         isSyncing=false;
@@ -534,13 +610,48 @@ async function sync(show=true){
     }
 }
 function scheduleSync(){saveLocal();if(!admin())return;clearTimeout(autoTimer);autoTimer=setTimeout(()=>sync(false),AUTO_DELAY)}
-function saveConfig(e){
+async function saveConfig(e){
     e.preventDefault();
-    const token=cfgToken.value.trim(),owner=cfgOwner.value.trim(),repo=cfgRepo.value.trim(),file=cfgFile.value.trim()||'econ_data.json';
-    if(!token){showToast('请输入 GitHub Token','error');return}
+    if(configSaveBtn.disabled)return;
+    const token=normalizeToken(cfgToken.value),owner=cfgOwner.value.trim(),repo=cfgRepo.value.trim(),file=cfgFile.value.trim()||'econ_data.json';
+    if(!token){showToast('请输入 GitHub Token','error');cfgToken.focus();return}
     if(!owner||!repo){showToast('请输入仓库所有者和仓库名称','error');return}
-    config={token,tokenName:cfgTokenName.value.trim(),activeTokenId:'',owner,repo,file};
-    config.activeTokenId=upsertProfile();saveConfigBase();closeConfig();updateAdminUI();render();showToast('管理配置已保存','success');sync(true)
+
+    const originalText=configSaveBtn.textContent;
+    configSaveBtn.disabled=true;
+    configSaveBtn.textContent='正在验证…';
+    setStatus('syncing','正在验证 Token…');
+
+    try{
+        const verified=await verifyTokenAndRepository(token,owner,repo);
+        // 将清洗后的 Token 回填，避免复制时的 Bearer 前缀、引号、零宽字符再次进入存储。
+        cfgToken.value=verified.token;
+        config={
+            token:verified.token,
+            tokenName:cfgTokenName.value.trim(),
+            activeTokenId:'',
+            owner,
+            repo,
+            file
+        };
+        config.activeTokenId=upsertProfile();
+        saveConfigBase();
+        closeConfig();
+        updateAdminUI();
+        render();
+        setStatus('online',`管理已验证 · ${verified.user.login}`);
+        showToast(`Token 验证成功：${verified.user.login} · ${owner}/${repo}`,'success');
+        await sync(true)
+    }catch(err){
+        console.error(err);
+        setStatus('offline',err.status===401?'Token 无效':'配置验证失败');
+        showToast(apiErrorMessage(err),'error');
+        // 验证失败时保留配置窗口和用户输入，绝不保存失败凭据，也绝不开始同步。
+        cfgToken.focus()
+    }finally{
+        configSaveBtn.disabled=false;
+        configSaveBtn.textContent=originalText
+    }
 }
 
 function navigateTo(id){
