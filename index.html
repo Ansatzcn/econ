@@ -11,7 +11,7 @@
 <meta property="og:description" content="经济文献">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{min-height:100vh;padding:2rem 1rem 4rem;background:#f5f7fa;color:#1e293b;font-family:"Times New Roman","Microsoft YaHei","PingFang SC",serif}button,input,select{font:inherit}.container{width:min(100%,980px);margin:auto;padding:2rem 1.8rem;background:#fff;border-radius:30px;box-shadow:0 20px 40px -12px rgba(15,23,42,.14)}.page-header{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;padding-bottom:.75rem;margin-bottom:1rem;border-bottom:2px solid #e9edf4}.page-header h1{font-size:2.25rem;font-weight:600}.public-status{display:flex;align-items:center;gap:7px;margin-top:.45rem;color:#64748b;font-size:.8rem}.dot{width:8px;height:8px;border-radius:50%;background:#94a3b8}.dot.online{background:#22c55e}.dot.offline{background:#ef4444}.dot.syncing{background:#f59e0b}.header-actions{display:flex;gap:12px;flex-wrap:wrap;padding-top:.35rem}.header-link{border:0;background:transparent;color:#475569;font-size:.92rem;font-weight:600;cursor:pointer;text-decoration:none}.header-link:hover,.header-link:focus-visible{color:#0f172a;text-decoration:underline;outline:none}.hidden{display:none!important}.sync-meta{text-align:right;color:#94a3b8;font-size:.78rem;margin-bottom:1.3rem}.entry-list{display:flex;flex-direction:column;gap:1.25rem}.entry-card{padding:1.35rem 1.4rem 1.5rem;border:1px solid #e2e8f0;border-radius:20px;background:#fff}.entry-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:start;margin-bottom:1rem}.entry-title{font-size:1.28rem;line-height:1.35;overflow-wrap:anywhere}.entry-title a{color:#0f172a;text-decoration:none}.entry-title a:hover,.entry-title a:focus-visible{text-decoration:underline;outline:none}.entry-date{font-size:.88rem;color:#64748b;white-space:nowrap}.entry-body{font-size:1rem;line-height:1.8;color:#334155;overflow-wrap:anywhere}.entry-body a{color:#2563eb;text-decoration:none}.entry-body a:hover,.entry-body a:focus-visible{color:#1d4ed8;text-decoration:underline;outline:none}.entry-body p,.entry-body div,.entry-body blockquote,.entry-body ul,.entry-body ol{margin:.55rem 0}.entry-body ul,.entry-body ol{padding-left:1.6rem}.entry-body hr,.editor hr{border:0;border-top:1px solid #cbd5e1;margin:1.15rem 0}.entry-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:1rem}.entry-action{border:0;border-radius:999px;padding:.32rem .75rem;background:#f1f5f9;color:#64748b;font-size:.78rem;cursor:pointer;text-decoration:none}.entry-action:hover{background:#e2e8f0}.entry-action.delete{color:#991b1b;background:#fff1f2}.empty-state{padding:3rem 1rem;text-align:center;color:#94a3b8;border:1px dashed #cbd5e1;border-radius:20px;background:#fafcff}.article-back{display:inline-block;margin-bottom:1.1rem;color:#64748b;text-decoration:none;font-size:.88rem}.article-back:hover{text-decoration:underline;color:#334155}
-.modal-overlay{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;z-index:1000;display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));background:rgba(15,23,42,.48);backdrop-filter:blur(5px)}.modal-overlay.hidden{display:none}.modal-box,.config-box{width:min(94vw,760px);max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));display:flex;flex-direction:column;overflow:hidden;background:#fff;border-radius:24px;box-shadow:0 28px 60px rgba(15,23,42,.28)}.config-box{width:min(94vw,600px)}.modal-scroll,.config-scroll{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable;padding:1.6rem 1.6rem 1rem}.modal-scroll::-webkit-scrollbar,.config-scroll::-webkit-scrollbar{width:9px}.modal-scroll::-webkit-scrollbar-track,.config-scroll::-webkit-scrollbar-track{background:#f1f5f9}.modal-scroll::-webkit-scrollbar-thumb,.config-scroll::-webkit-scrollbar-thumb{background:#cbd5e1;border:2px solid #f1f5f9;border-radius:999px}.modal-title{font-size:1.35rem;margin-bottom:1.2rem}.config-desc{font-size:.88rem;line-height:1.55;color:#64748b;padding-bottom:.8rem;margin-bottom:1.15rem;border-bottom:1px solid #e2e8f0}.form-group{margin-bottom:1rem}.form-group label{display:block;margin-bottom:.35rem;color:#475569;font-size:.82rem;font-weight:700}.form-group input,.form-group select{width:100%;padding:.72rem .9rem;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#0f172a;outline:none}.form-group input:focus,.form-group select:focus{border-color:#94a3b8;box-shadow:0 0 0 3px rgba(148,163,184,.18)}.hint,.token-note{margin-top:.4rem;color:#94a3b8;font-size:.76rem;line-height:1.5}.token-note{color:#64748b}.hint a{color:#2563eb;text-decoration:none}.editor-shell{border:1px solid #cbd5e1;border-radius:14px;overflow:hidden}.editor-toolbar{display:flex;flex-wrap:wrap;gap:6px;padding:.55rem;border-bottom:1px solid #e2e8f0;background:#f8fafc}.editor-tool{min-width:34px;min-height:32px;padding:.35rem .55rem;border:1px solid #d7dee8;border-radius:8px;background:#fff;color:#334155;cursor:pointer;font-size:.86rem}.editor-tool.bold{font-weight:700}.editor-tool.italic{font-style:italic}.editor-tool.underline{text-decoration:underline}.editor{min-height:320px;max-height:52vh;overflow-y:auto;padding:1rem 1.05rem;font-size:1rem;line-height:1.8;outline:none}.editor:empty:before{content:"输入正文……";color:#94a3b8;pointer-events:none}.editor p,.editor div,.editor ul,.editor ol,.editor blockquote{margin:.55rem 0}.editor ul,.editor ol{padding-left:1.6rem}.modal-actions,.config-actions{flex:0 0 auto;display:flex;justify-content:flex-end;gap:10px;padding:.95rem 1.6rem max(.95rem,env(safe-area-inset-bottom));border-top:1px solid #e2e8f0;background:#fff;box-shadow:0 -8px 18px rgba(15,23,42,.04)}.modal-btn,.btn-config{padding:.62rem 1.45rem;border:0;border-radius:999px;font-weight:700;cursor:pointer}.secondary{background:#f1f5f9;color:#334155}.primary{background:#1e293b;color:#fff}.token-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px}.token-btn{border:1px solid #d1d9e6;border-radius:12px;background:#f8fafc;color:#334155;padding:.66rem .85rem;font-size:.82rem;font-weight:700;white-space:nowrap;cursor:pointer}.token-btn.danger{color:#991b1b;background:#fff7f7;border-color:#fecaca}.token-btn:disabled{opacity:.45;cursor:not-allowed}.back-to-top{position:fixed;right:14px;top:68%;transform:translateY(-50%);z-index:800;padding:.46rem .68rem;border:1px solid rgba(148,163,184,.5);border-radius:999px;background:rgba(255,255,255,.78);color:#64748b;box-shadow:0 4px 14px rgba(15,23,42,.07);font-size:.76rem;cursor:pointer;opacity:0;visibility:hidden;pointer-events:none;transition:.18s;backdrop-filter:blur(5px)}.back-to-top.visible{opacity:.58;visibility:visible;pointer-events:auto}.back-to-top:hover{opacity:1}.toc-control{position:fixed;left:14px;top:68%;transform:translateY(-50%);z-index:860}.toc-button{padding:.46rem .68rem;border:1px solid rgba(148,163,184,.5);border-radius:999px;background:rgba(255,255,255,.78);color:#64748b;box-shadow:0 4px 14px rgba(15,23,42,.07);font:inherit;font-size:.76rem;cursor:pointer;opacity:.58;transition:.18s;backdrop-filter:blur(5px)}.toc-button:hover,.toc-button:focus-visible,.toc-control.open .toc-button{opacity:1;background:rgba(255,255,255,.96);color:#334155;outline:none}.toc-panel{position:absolute;left:0;bottom:calc(100% + 10px);width:min(300px,78vw);max-height:min(62vh,500px);padding:.75rem;background:rgba(255,255,255,.97);border:1px solid #e2e8f0;border-radius:18px;box-shadow:10px 12px 32px rgba(15,23,42,.14);backdrop-filter:blur(8px);overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:.18s}.toc-control.open .toc-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}.toc-head{padding:.15rem .25rem .55rem;border-bottom:1px solid #e9edf4;color:#475569;font-size:.82rem;font-weight:700}.toc-list{list-style:none;max-height:calc(min(62vh,500px) - 48px);overflow-y:auto;padding:.45rem .1rem .1rem}.toc-list li+li{border-top:1px solid #f1f5f9}.toc-link{display:block;width:100%;padding:.55rem .5rem;color:#475569;text-decoration:none;font-size:.84rem;line-height:1.35;overflow-wrap:anywhere;border-radius:8px}.toc-link:hover,.toc-link:focus-visible{background:#f1f5f9;color:#0f172a;outline:none}.toc-empty{padding:.8rem .5rem;color:#94a3b8;font-size:.8rem;text-align:center}.toast{position:fixed;left:50%;bottom:26px;z-index:1200;transform:translateX(-50%);max-width:90vw;padding:.72rem 1.2rem;border-radius:999px;background:#1e293b;color:#fff;font-size:.88rem;box-shadow:0 8px 26px rgba(15,23,42,.22)}.toast.hidden{display:none}.toast.success{background:#16a34a}.toast.error{background:#dc2626}.toast.info{background:#2563eb}
+.modal-overlay{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;z-index:1000;display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));background:rgba(15,23,42,.48);backdrop-filter:blur(5px)}.modal-overlay.hidden{display:none}.modal-box,.config-box{width:min(94vw,760px);max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));display:flex;flex-direction:column;overflow:hidden;background:#fff;border-radius:24px;box-shadow:0 28px 60px rgba(15,23,42,.28)}.config-box{width:min(94vw,600px)}.modal-scroll,.config-scroll{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable;padding:1.6rem 1.6rem 1rem}.modal-scroll::-webkit-scrollbar,.config-scroll::-webkit-scrollbar{width:9px}.modal-scroll::-webkit-scrollbar-track,.config-scroll::-webkit-scrollbar-track{background:#f1f5f9}.modal-scroll::-webkit-scrollbar-thumb,.config-scroll::-webkit-scrollbar-thumb{background:#cbd5e1;border:2px solid #f1f5f9;border-radius:999px}.modal-title{font-size:1.35rem;margin-bottom:1.2rem}.config-desc{font-size:.88rem;line-height:1.55;color:#64748b;padding-bottom:.8rem;margin-bottom:1.15rem;border-bottom:1px solid #e2e8f0}.form-group{margin-bottom:1rem}.form-group label{display:block;margin-bottom:.35rem;color:#475569;font-size:.82rem;font-weight:700}.form-group input,.form-group select{width:100%;padding:.72rem .9rem;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#0f172a;outline:none}.form-group input:focus,.form-group select:focus{border-color:#94a3b8;box-shadow:0 0 0 3px rgba(148,163,184,.18)}.hint,.token-note{margin-top:.4rem;color:#94a3b8;font-size:.76rem;line-height:1.5}.token-note{color:#64748b}.hint a{color:#2563eb;text-decoration:none}.editor-shell{border:1px solid #cbd5e1;border-radius:14px;overflow:hidden}.editor-toolbar{display:flex;flex-wrap:wrap;gap:6px;padding:.55rem;border-top:1px solid #e2e8f0;background:#f8fafc}.editor-tool{min-width:34px;min-height:32px;padding:.35rem .55rem;border:1px solid #d7dee8;border-radius:8px;background:#fff;color:#334155;cursor:pointer;font-size:.86rem}.editor-tool.bold{font-weight:700}.editor-tool.italic{font-style:italic}.editor-tool.underline{text-decoration:underline}.editor{min-height:320px;max-height:52vh;overflow-y:auto;padding:1rem 1.05rem;font-size:1rem;line-height:1.8;outline:none}.editor:empty:before{content:"输入正文……";color:#94a3b8;pointer-events:none}.editor p,.editor div,.editor ul,.editor ol,.editor blockquote{margin:.55rem 0}.editor ul,.editor ol{padding-left:1.6rem}.modal-actions,.config-actions{flex:0 0 auto;display:flex;justify-content:flex-end;gap:10px;padding:.95rem 1.6rem max(.95rem,env(safe-area-inset-bottom));border-top:1px solid #e2e8f0;background:#fff;box-shadow:0 -8px 18px rgba(15,23,42,.04)}.modal-btn,.btn-config{padding:.62rem 1.45rem;border:0;border-radius:999px;font-weight:700;cursor:pointer}.secondary{background:#f1f5f9;color:#334155}.danger{background:#fee2e2;color:#991b1b}.danger:hover{background:#fecaca}.primary{background:#1e293b;color:#fff}.token-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px}.token-btn{border:1px solid #d1d9e6;border-radius:12px;background:#f8fafc;color:#334155;padding:.66rem .85rem;font-size:.82rem;font-weight:700;white-space:nowrap;cursor:pointer}.token-btn.danger{color:#991b1b;background:#fff7f7;border-color:#fecaca}.token-btn:disabled{opacity:.45;cursor:not-allowed}.back-to-top{position:fixed;right:14px;top:68%;transform:translateY(-50%);z-index:800;padding:.46rem .68rem;border:1px solid rgba(148,163,184,.5);border-radius:999px;background:rgba(255,255,255,.78);color:#64748b;box-shadow:0 4px 14px rgba(15,23,42,.07);font-size:.76rem;cursor:pointer;opacity:0;visibility:hidden;pointer-events:none;transition:.18s;backdrop-filter:blur(5px)}.back-to-top.visible{opacity:.58;visibility:visible;pointer-events:auto}.back-to-top:hover{opacity:1}.toc-control{position:fixed;left:14px;top:68%;transform:translateY(-50%);z-index:860}.toc-button{padding:.46rem .68rem;border:1px solid rgba(148,163,184,.5);border-radius:999px;background:rgba(255,255,255,.78);color:#64748b;box-shadow:0 4px 14px rgba(15,23,42,.07);font:inherit;font-size:.76rem;cursor:pointer;opacity:.58;transition:.18s;backdrop-filter:blur(5px)}.toc-button:hover,.toc-button:focus-visible,.toc-control.open .toc-button{opacity:1;background:rgba(255,255,255,.96);color:#334155;outline:none}.toc-panel{position:absolute;left:0;bottom:calc(100% + 10px);width:min(300px,78vw);max-height:min(62vh,500px);padding:.75rem;background:rgba(255,255,255,.97);border:1px solid #e2e8f0;border-radius:18px;box-shadow:10px 12px 32px rgba(15,23,42,.14);backdrop-filter:blur(8px);overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:.18s}.toc-control.open .toc-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}.toc-head{padding:.15rem .25rem .55rem;border-bottom:1px solid #e9edf4;color:#475569;font-size:.82rem;font-weight:700}.toc-list{list-style:none;max-height:calc(min(62vh,500px) - 48px);overflow-y:auto;padding:.45rem .1rem .1rem}.toc-list li+li{border-top:1px solid #f1f5f9}.toc-link{display:block;width:100%;padding:.55rem .5rem;color:#475569;text-decoration:none;font-size:.84rem;line-height:1.35;overflow-wrap:anywhere;border-radius:8px}.toc-link:hover,.toc-link:focus-visible{background:#f1f5f9;color:#0f172a;outline:none}.toc-empty{padding:.8rem .5rem;color:#94a3b8;font-size:.8rem;text-align:center}.toast{position:fixed;left:50%;bottom:26px;z-index:1200;transform:translateX(-50%);max-width:90vw;padding:.72rem 1.2rem;border-radius:999px;background:#1e293b;color:#fff;font-size:.88rem;box-shadow:0 8px 26px rgba(15,23,42,.22)}.toast.hidden{display:none}.toast.success{background:#16a34a}.toast.error{background:#dc2626}.toast.info{background:#2563eb}
 @media(max-width:700px){body{padding:1rem .7rem 3.5rem}.container{padding:1.2rem 1rem 1.4rem;border-radius:22px}.page-header h1{font-size:1.9rem}.entry-card{padding:1.05rem 1rem 1.2rem}.entry-title{font-size:1.12rem}.entry-date{font-size:.8rem}.modal-overlay{align-items:stretch;padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}.modal-box,.config-box{width:100%;max-height:calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom));border-radius:18px}.modal-scroll,.config-scroll{padding:1.1rem 1rem .8rem}.editor{min-height:240px;max-height:45vh}.modal-actions,.config-actions{padding:.8rem 1rem max(.8rem,env(safe-area-inset-bottom))}.modal-btn,.btn-config{flex:1 1 0}.token-row{grid-template-columns:minmax(0,1fr) auto}.token-btn.danger{grid-column:1/-1}.back-to-top{right:7px;top:70%;font-size:.7rem;padding:.42rem .56rem}.toc-control{left:7px;top:70%}.toc-button{font-size:.7rem;padding:.42rem .56rem}.toc-panel{width:min(280px,84vw)}}
 </style>
 <script>
@@ -52,8 +52,10 @@ window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],processEsc
 <h2 class="modal-title" id="entryModalTitle">添加文献</h2>
 <div class="form-group"><label for="titleInput">标题</label><input id="titleInput" type="text" autocomplete="off"></div>
 <div class="form-group"><label for="dateInput">日期</label><input id="dateInput" type="date"></div>
+<div class="form-group"><label for="idInput">推文链接结尾六位数字</label><input id="idInput" type="text" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="例如 123456"><div class="hint">新增文章时必须手工填写六位数字；保存后该编号作为文章链接结尾，不再自动或随机生成。</div></div>
 <div class="form-group"><label>正文</label>
 <div class="editor-shell">
+<div class="editor" id="bodyEditor" contenteditable="true" spellcheck="true"></div>
 <div class="editor-toolbar">
 <button class="editor-tool bold" data-command="bold" type="button">B</button>
 <button class="editor-tool italic" data-command="italic" type="button">I</button>
@@ -66,10 +68,9 @@ window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],processEsc
 <button class="editor-tool" data-command="insertHorizontalRule" type="button">横线</button>
 <button class="editor-tool" data-command="removeFormat" type="button">清除格式</button>
 </div>
-<div class="editor" id="bodyEditor" contenteditable="true" spellcheck="true"></div>
 </div></div>
 </div>
-<div class="modal-actions"><button class="modal-btn secondary" id="entryCancelBtn" type="button">取消</button><button class="modal-btn primary" id="entrySaveBtn" type="button">保存</button></div>
+<div class="modal-actions"><button class="modal-btn danger hidden" id="entryDeleteBtn" type="button">删除</button><button class="modal-btn secondary" id="entryCancelBtn" type="button">取消</button><button class="modal-btn primary" id="entrySaveBtn" type="button">保存</button></div>
 </div>
 </section>
 
@@ -77,7 +78,7 @@ window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],processEsc
 <form class="config-box" id="configForm" autocomplete="on">
 <div class="config-scroll">
 <h2 class="modal-title" id="configHeading">管理配置</h2>
-<p class="config-desc">所有访问者都可直接阅读，无需 Token。管理同步时会更新 econ_data.json，并为每篇文献自动创建“六位数字/index.html”静态页面。</p>
+<p class="config-desc">所有访问者都可直接阅读，无需 Token。管理同步时会更新 econ_data.json，并根据每篇文献手工填写的六位数字创建“六位数字/index.html”静态页面。</p>
 <div class="form-group"><label for="cfgSavedToken">已保存 Token</label><div class="token-row"><select id="cfgSavedToken"><option value="">新增 Token</option></select><button class="token-btn" id="cfgNewTokenBtn" type="button">新增</button><button class="token-btn danger" id="cfgDeleteTokenBtn" type="button" disabled>删除</button></div></div>
 <div class="form-group"><label for="cfgTokenName">Token 名称</label><input id="cfgTokenName" type="text" autocomplete="off"></div>
 <div class="form-group"><label for="cfgOwner">仓库所有者</label><input id="cfgOwner" name="github-owner" type="text" autocomplete="username"></div>
@@ -109,7 +110,7 @@ const $=id=>document.getElementById(id);
 const entryList=$('entryList'),addLink=$('addLink'),syncBtn=$('syncBtn'),configBtn=$('configBtn'),homeLink=$('homeLink'),
 statusDot=$('statusDot'),statusText=$('statusText'),lastSyncTime=$('lastSyncTime'),tocControl=$('tocControl'),tocButton=$('tocButton'),
 tocPanel=$('tocPanel'),tocList=$('tocList'),backToTopBtn=$('backToTopBtn'),entryModal=$('entryModal'),entryModalTitle=$('entryModalTitle'),
-titleInput=$('titleInput'),dateInput=$('dateInput'),bodyEditor=$('bodyEditor'),entryCancelBtn=$('entryCancelBtn'),entrySaveBtn=$('entrySaveBtn'),
+titleInput=$('titleInput'),dateInput=$('dateInput'),idInput=$('idInput'),bodyEditor=$('bodyEditor'),entryDeleteBtn=$('entryDeleteBtn'),entryCancelBtn=$('entryCancelBtn'),entrySaveBtn=$('entrySaveBtn'),
 indentBtn=$('indentBtn'),configModal=$('configModal'),configForm=$('configForm'),cfgSavedToken=$('cfgSavedToken'),
 cfgNewTokenBtn=$('cfgNewTokenBtn'),cfgDeleteTokenBtn=$('cfgDeleteTokenBtn'),cfgTokenName=$('cfgTokenName'),cfgToken=$('cfgToken'),
 cfgOwner=$('cfgOwner'),cfgRepo=$('cfgRepo'),cfgFile=$('cfgFile'),configCancelBtn=$('configCancelBtn'),configSaveBtn=$('configSaveBtn'),toast=$('toast');
@@ -251,21 +252,7 @@ window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],processEsc
 </body>
 </html>`
 }
-function makeStableSixDigitId(seed,used){
-    let hash=0x811c9dc5;
-    const text=String(seed??'');
-    for(let i=0;i<text.length;i++){
-        hash^=text.charCodeAt(i);
-        hash=Math.imul(hash,0x01000193)
-    }
-    let number=100000+((hash>>>0)%900000);
-    for(let i=0;i<900000;i++){
-        const id=String(number);
-        if(!used.has(id))return id;
-        number=number===999999?100000:number+1
-    }
-    throw new Error('六位数字编号已用尽')
-}
+
 function normItem(x,idOverride=''){
     if(!x||typeof x!=='object')return null;
     const id=String(idOverride||x.id||'').trim(),title=String(x.title||'').trim(),date=String(x.date||'').trim(),body=clean(x.body||'');
@@ -275,35 +262,26 @@ function normItem(x,idOverride=''){
 function normList(v){
     if(!Array.isArray(v))return[];
     const used=new Set(),result=[];
-    v.forEach((x,index)=>{
+    v.forEach(x=>{
         if(!x||typeof x!=='object')return;
-        const title=String(x.title||'').trim(),date=String(x.date||'').trim(),body=clean(x.body||'');
-        if(!title||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!textOf(body))return;
-        let id=String(x.id||'').trim();
-        if(!/^\d{6}$/.test(id)||used.has(id)){
-            id=makeStableSixDigitId(`${title}\u0000${date}\u0000${body}\u0000${Number(x.createdAt)||0}\u0000${index}`,used)
-        }
-        used.add(id);
+        const id=String(x.id||'').trim();
+        if(!/^\d{6}$/.test(id)||used.has(id))return;
         const item=normItem(x,id);
-        if(item)result.push(item)
+        if(!item)return;
+        used.add(id);
+        result.push(item)
     });
     return result
 }
-function sortEntries(){entries.sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0)||a.title.localeCompare(b.title,'zh-CN'))}
+function sortEntries(){
+    // 严格按添加先后倒序：越晚添加的文章越靠上。
+    // 旧数据若没有 createdAt，则保持其当前相对顺序。
+    entries.sort((a,b)=>(Number(b.createdAt)||0)-(Number(a.createdAt)||0))
+}
 function fingerprint(v=entries){return JSON.stringify(normList(v).slice().sort((a,b)=>a.id.localeCompare(b.id)))}
 function saveLocal(){ls(DATA_KEY,JSON.stringify(entries))}
 function loadLocal(){const s=lg(DATA_KEY);if(!s)return[];try{return normList(JSON.parse(s))}catch(e){return[]}}
-function nextId(){
-    const used=new Set(entries.map(x=>x.id));
-    for(let i=0;i<200;i++){
-        const a=new Uint32Array(1);
-        crypto.getRandomValues(a);
-        const id=String(100000+(a[0]%900000));
-        if(!used.has(id))return id
-    }
-    for(let n=100000;n<=999999;n++){const id=String(n);if(!used.has(id))return id}
-    throw new Error('数字链接已用尽')
-}
+
 function setStatus(s,t){statusDot.className=`dot ${s}`;statusText.textContent=t}
 function showToast(m,t='info'){toast.textContent=m;toast.className=`toast ${t}`;toast.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.add('hidden'),3000)}
 function admin(){return !!(config.token&&config.owner&&config.repo&&config.file)}
@@ -317,8 +295,8 @@ function renderToc(list){
     tocList.innerHTML=list.length?list.map(x=>`<li><a class="toc-link" href="${attr(articlePath(x.id))}" data-id="${attr(x.id)}">${esc(x.title)}</a></li>`).join(''):'<li class="toc-empty">暂无文章</li>'
 }
 function card(x){
-    const manage=admin()?`<button class="entry-action edit-entry" type="button" data-id="${attr(x.id)}">编辑</button><button class="entry-action delete delete-entry" type="button" data-id="${attr(x.id)}">删除</button>`:'';
-    return `<article class="entry-card" id="entry-${attr(x.id)}" data-id="${attr(x.id)}"><div class="entry-head"><h2 class="entry-title"><a class="article-link" href="${attr(articlePath(x.id))}" data-id="${attr(x.id)}">${esc(x.title)}</a></h2><time class="entry-date" datetime="${attr(x.date)}">${esc(x.date)}</time></div><div class="entry-body">${renderMarkdownLinks(x.body)}</div><div class="entry-actions"><button class="entry-action copy-link" type="button" data-id="${attr(x.id)}">复制链接</button>${manage}</div></article>`
+    const manage=admin()?`<button class="entry-action edit-entry" type="button" data-id="${attr(x.id)}">编辑</button>`:'';
+    return `<article class="entry-card" id="entry-${attr(x.id)}" data-id="${attr(x.id)}"><div class="entry-head"><h2 class="entry-title"><a class="article-link" href="${attr(articlePath(x.id))}" data-id="${attr(x.id)}">${esc(x.title)}</a></h2><time class="entry-date" datetime="${attr(x.date)}">${esc(x.date)}</time></div><div class="entry-body">${renderMarkdownLinks(x.body)}</div>${manage?`<div class="entry-actions">${manage}</div>`:''}</article>`
 }
 function render(){
     clearMath();sortEntries();saveLocal();updateAdminUI();
@@ -362,15 +340,35 @@ function openEntry(id=null){
     previousFocus=document.activeElement;editingId=id;
     if(id){
         const x=entries.find(e=>e.id===id);if(!x)return;
-        entryModalTitle.textContent='编辑文献';titleInput.value=x.title;dateInput.value=x.date;bodyEditor.innerHTML=clean(x.body)
+        entryModalTitle.textContent='编辑文献';
+        titleInput.value=x.title;
+        dateInput.value=x.date;
+        idInput.value=x.id;
+        idInput.disabled=true;
+        bodyEditor.innerHTML=clean(x.body);
+        entryDeleteBtn.classList.remove('hidden')
     }else{
-        entryModalTitle.textContent='添加文献';titleInput.value='';dateInput.value=today();bodyEditor.innerHTML=''
+        entryModalTitle.textContent='添加文献';
+        titleInput.value='';
+        dateInput.value=today();
+        idInput.value='';
+        idInput.disabled=false;
+        bodyEditor.innerHTML='';
+        entryDeleteBtn.classList.add('hidden')
     }
     entryModal.classList.remove('hidden');setTimeout(()=>titleInput.focus(),50)
 }
-function closeEntry(){entryModal.classList.add('hidden');editingId=null;if(previousFocus instanceof HTMLElement)previousFocus.focus();previousFocus=null}
+function closeEntry(){
+    entryModal.classList.add('hidden');
+    editingId=null;
+    idInput.disabled=false;
+    entryDeleteBtn.classList.add('hidden');
+    if(previousFocus instanceof HTMLElement)previousFocus.focus();
+    previousFocus=null
+}
 function saveEntry(){
     const title=titleInput.value.trim(),date=dateInput.value,body=clean(bodyEditor.innerHTML);
+    const requestedId=String(idInput.value||'').trim();
     if(!title){showToast('请输入标题','error');titleInput.focus();return}
     if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){showToast('请选择日期','error');dateInput.focus();return}
     if(!textOf(body)){showToast('请输入正文','error');bodyEditor.focus();return}
@@ -378,13 +376,23 @@ function saveEntry(){
         const x=entries.find(e=>e.id===editingId);if(!x)return;
         x.title=title;x.date=date;x.body=body;x.updatedAt=Date.now()
     }else{
-        entries.push({id:nextId(),title,date,body,createdAt:Date.now(),updatedAt:Date.now()})
+        if(!/^\d{6}$/.test(requestedId)){
+            showToast('请输入推文链接结尾的六位数字','error');
+            idInput.focus();
+            return
+        }
+        if(entries.some(e=>e.id===requestedId)){
+            showToast('该六位数字已被使用，请填写另一个编号','error');
+            idInput.focus();
+            return
+        }
+        entries.push({id:requestedId,title,date,body,createdAt:Date.now(),updatedAt:Date.now()})
     }
     render();closeEntry();scheduleSync();showToast('已保存','success')
 }
 function delEntry(id){
-    const x=entries.find(e=>e.id===id);if(!x||!confirm(`确定删除“${x.title}”吗？`))return;
-    entries=entries.filter(e=>e.id!==id);render();scheduleSync();showToast('已删除','success')
+    const x=entries.find(e=>e.id===id);if(!x||!confirm(`确定删除“${x.title}”吗？`))return false;
+    entries=entries.filter(e=>e.id!==id);render();scheduleSync();showToast('已删除','success');return true
 }
 function command(c){bodyEditor.focus();document.execCommand(c,false,null)}
 function indent(){
@@ -697,13 +705,14 @@ function navigateTo(id){
 entryList.addEventListener('click',e=>{
     const link=e.target.closest('.article-link');
     if(link)return;
-    const copy=e.target.closest('.copy-link');
-    if(copy){navigator.clipboard?.writeText(articleUrl(copy.dataset.id)).then(()=>showToast('链接已复制','success')).catch(()=>showToast(articleUrl(copy.dataset.id),'info'));return}
     const edit=e.target.closest('.edit-entry');if(edit){openEntry(edit.dataset.id);return}
-    const del=e.target.closest('.delete-entry');if(del)delEntry(del.dataset.id)
 });
 homeLink.addEventListener('click',e=>{e.preventDefault();history.pushState({},'',basePath());render();scrollTo({top:0,behavior:'instant'})});
 addLink.addEventListener('click',()=>openEntry());
+entryDeleteBtn.addEventListener('click',()=>{
+    const id=editingId;
+    if(id&&delEntry(id))closeEntry()
+});
 entryCancelBtn.addEventListener('click',closeEntry);entrySaveBtn.addEventListener('click',saveEntry);
 entryModal.addEventListener('click',e=>{if(e.target===entryModal)closeEntry()});
 document.querySelectorAll('.editor-tool[data-command]').forEach(b=>{b.addEventListener('mousedown',e=>e.preventDefault());b.addEventListener('click',()=>command(b.dataset.command))});
